@@ -1,0 +1,1082 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Documento de arquitetura - Alohomora</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#alohomora-portaria-virtual" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Alohomora" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Alohomora
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Documento de arquitetura
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Alohomora" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Alohomora
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Início" class="md-nav__link">
+      Início
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Projeto
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Projeto
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doc_visao/" title="Documento de visão" class="md-nav__link">
+      Documento de visão
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Documento de arquitetura
+      </label>
+    
+    <a href="./" title="Documento de arquitetura" class="md-nav__link md-nav__link--active">
+      Documento de arquitetura
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    Arquitetura
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versao-10" class="md-nav__link">
+    Versão 1.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    Histórico de Revisão
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    Sumário
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao" class="md-nav__link">
+    1. Introdução
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-objetivo" class="md-nav__link">
+    1.1 Objetivo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-escopo" class="md-nav__link">
+    1.2 Escopo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-definicoes-acronimos-e-abreviacoes" class="md-nav__link">
+    1.3 Definições, Acrônimos e Abreviações
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-referencias" class="md-nav__link">
+    1.4 Referências
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-representacao-da-arquitetura" class="md-nav__link">
+    2. Representação da Arquitetura
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-django" class="md-nav__link">
+    2.1 Django
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211-mvt" class="md-nav__link">
+    2.1.1 MVT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-graphql" class="md-nav__link">
+    2.2 GraphQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#221-graphene-python" class="md-nav__link">
+    2.2.1 Graphene-Python
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-graphene-django" class="md-nav__link">
+    2.2.2 Graphene-Django
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-vuejs" class="md-nav__link">
+    2.3 Vue.js
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-objetivos-e-restricoes-da-arquitetura" class="md-nav__link">
+    3. Objetivos e Restrições da Arquitetura
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-objetivos" class="md-nav__link">
+    3.1 Objetivos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-restricoes" class="md-nav__link">
+    3.2 Restrições
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-visao-logica" class="md-nav__link">
+    4. Visão Lógica
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-visao-geral" class="md-nav__link">
+    4.1 Visão Geral
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-diagrama-de-relacoes" class="md-nav__link">
+    4.2 Diagrama de Relações
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-diagrama-de-pacotes" class="md-nav__link">
+    4.3 Diagrama de Pacotes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-qualidade" class="md-nav__link">
+    5. Qualidade
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Gerência
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Gerência
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gerencia/TAP/" title="Termo de abertura do projeto" class="md-nav__link">
+      Termo de abertura do projeto
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gerencia/EAP/" title="Estrutura analítica do projeto" class="md-nav__link">
+      Estrutura analítica do projeto
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gerencia/plano_riscos/" title="Plano de gerenciamento de riscos" class="md-nav__link">
+      Plano de gerenciamento de riscos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gerencia/plano_custos/" title="Plano de gerencimaneto de custos" class="md-nav__link">
+      Plano de gerencimaneto de custos
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Sprints
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Sprints
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sprints/sprint_1/" title="Sprint 1" class="md-nav__link">
+      Sprint 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sprints/sprint_2/" title="Sprint 2" class="md-nav__link">
+      Sprint 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sprints/sprint_3/" title="Sprint 3" class="md-nav__link">
+      Sprint 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sprints/sprint_4/" title="Sprint 4" class="md-nav__link">
+      Sprint 4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sprints/sprint_5/" title="Sprint 5" class="md-nav__link">
+      Sprint 5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sprints/sprint_6/" title="Sprint 6" class="md-nav__link">
+      Sprint 6
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    Arquitetura
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versao-10" class="md-nav__link">
+    Versão 1.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    Histórico de Revisão
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    Sumário
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao" class="md-nav__link">
+    1. Introdução
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-objetivo" class="md-nav__link">
+    1.1 Objetivo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-escopo" class="md-nav__link">
+    1.2 Escopo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-definicoes-acronimos-e-abreviacoes" class="md-nav__link">
+    1.3 Definições, Acrônimos e Abreviações
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-referencias" class="md-nav__link">
+    1.4 Referências
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-representacao-da-arquitetura" class="md-nav__link">
+    2. Representação da Arquitetura
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-django" class="md-nav__link">
+    2.1 Django
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211-mvt" class="md-nav__link">
+    2.1.1 MVT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-graphql" class="md-nav__link">
+    2.2 GraphQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#221-graphene-python" class="md-nav__link">
+    2.2.1 Graphene-Python
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-graphene-django" class="md-nav__link">
+    2.2.2 Graphene-Django
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-vuejs" class="md-nav__link">
+    2.3 Vue.js
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-objetivos-e-restricoes-da-arquitetura" class="md-nav__link">
+    3. Objetivos e Restrições da Arquitetura
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-objetivos" class="md-nav__link">
+    3.1 Objetivos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-restricoes" class="md-nav__link">
+    3.2 Restrições
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-visao-logica" class="md-nav__link">
+    4. Visão Lógica
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-visao-geral" class="md-nav__link">
+    4.1 Visão Geral
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-diagrama-de-relacoes" class="md-nav__link">
+    4.2 Diagrama de Relações
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-diagrama-de-pacotes" class="md-nav__link">
+    4.3 Diagrama de Pacotes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-qualidade" class="md-nav__link">
+    5. Qualidade
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="alohomora-portaria-virtual">Alohomora - Portaria Virtual</h1>
+<h3 id="arquitetura">Arquitetura</h3>
+<h4 id="versao-10">Versão 1.0</h4>
+<h2 id="historico-de-revisao">Histórico de Revisão</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>26/09/2019</td>
+<td>1.0</td>
+<td>Criação da primeira versão do documento</td>
+<td>Paulo Batista, Rodrigo Lima, Victor Gonçalves</td>
+</tr>
+<tr>
+<td>01/10/2019</td>
+<td>1.1</td>
+<td>Revisão de erros ortográficos e sintaxe</td>
+<td>João Luis Baraky, Victor Jorge Gonçalves</td>
+</tr>
+<tr>
+<td>06/10/2019</td>
+<td>1.2</td>
+<td>Incremento de uma explicação básica do que é significa MVT</td>
+<td>Rodrigo Lima, João Luis Baraky</td>
+</tr>
+<tr>
+<td>07/10/2019</td>
+<td>1.2</td>
+<td>Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5</td>
+<td>João Luis Baraky, Rodrigo Lima</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sumario">Sumário</h2>
+<p><strong><a href="#1-introducao">1. Introdução</a></strong> \
+<a href="#11-objetivo">1.1 Objetivo</a> \
+<a href="#12-escopo">1.2 Escopo</a> \
+<a href="#13-definicoes-acronimos-e-abreviacoes">1.3 Definições, Acrônimos e Abreviações</a> \
+<a href="#14-referencias">1.4 Referências</a></p>
+<p><strong><a href="#2-representacao-da-arquitetura">2. Representação da Arquitetura</a></strong> \
+<a href="#21-django">2.1 Django</a> \
+<a href="#211-mvt">2.1.1 MVT</a>\
+<a href="#22-graphql">2.2 GraphQL</a> \
+<a href="#221-graphene-python">2.2.1 Graphene-Python</a> \
+<a href="#222-graphene-django">2.2.2 Graphene-Django</a> \
+<a href="#23-vuejs">2.3 Vue.js</a></p>
+<p><strong><a href="#3-objetivos-e-restricoes-da-arquitetura">3. Objetivos e Restrições da Arquitetura</a></strong> \
+<a href="#31-objetivos">3.1 Objetivos</a>
+<a href="#32-restricoes">3.2 Restrições</a></p>
+<p><strong><a href="#4-visao-logica">4. Visão Lógica</a></strong> \
+<a href="#41-visao-geral">4.1 Visão Geral</a></p>
+<p><strong><a href="#5-qualidade">5. Qualidade</a></strong></p>
+<h2 id="1-introducao">1. Introdução</h2>
+<h3 id="11-objetivo">1.1 Objetivo</h3>
+<p>Este documento pretende mostrar a arquitetura utilizada da portaria virtual Alohomora, e mostrar aos envolvidos cada parte da aplicação. Destina-se transmitir aos interessados as decisões arquiteturais que foram tomadas.</p>
+<h3 id="12-escopo">1.2 Escopo</h3>
+<p>Este documento fornece uma visão da arquitetura do Alohomora, um sistema de portaria virtual.
+Alohomora, é um projeto realizado para as disciplinas Métodos de Desenvolvimento de Software(MDS) e Engenharia de Produto de Software(EPS), do curso Engenharia de Software da Faculdade UnB Gama (FGA) da Universidade de Brasília(UnB).</p>
+<h3 id="13-definicoes-acronimos-e-abreviacoes">1.3 Definições, Acrônimos e Abreviações</h3>
+<table>
+<thead>
+<tr>
+<th>Acrônimo/Abreviação</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API</td>
+<td>Application Programming Interface</td>
+</tr>
+<tr>
+<td>MDS</td>
+<td>Métodos de Desenvolvimento de Software</td>
+</tr>
+<tr>
+<td>EPS</td>
+<td>Engenharia de Produto de Software</td>
+</tr>
+<tr>
+<td>MVT</td>
+<td>Model, View, Template</td>
+</tr>
+</tbody>
+</table>
+<h3 id="14-referencias">1.4 Referências</h3>
+<p>Sistema de Registro em Curso - Documento de Arquitetura de Software; Disponível em: <a href="http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm">http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm</a>. Acesso em: 26 de setembro de 2019.
+PATROCÍNIO, Sofia; GOUVEIA, Micaella; PEREIRA, Samuel; TAIRA, Luis; MUNIZ, Amanda. Chatbot Gaia: Arquitetura. Disponível em: <a href="https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md">https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md</a>. Acesso em: 26 de setembro de 2019. Padrões Arquiteturais MVC X Arquitetura do Django; Disponível em: <a href="https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django">https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django</a>. Acesso em: 05 de outubro de 2019.</p>
+<h2 id="2-representacao-da-arquitetura">2. Representação da Arquitetura</h2>
+<h3 id="21-django">2.1 Django</h3>
+<p>Django é um Python Web framework de alto-nível que encoraja o desenvolvimento rápido e organizado. O framework enfatiza a reusabilidade e conectividade de componentes, sendo assim,utiliza-se menos código.
+Aplica-se a arquitetura Model-View-Template (MVT).</p>
+<h3 id="211-mvt">2.1.1 MVT</h3>
+<ul>
+<li>Model - É a parte que representa as classes, além de ser a parte responsavel por ler e escrever informações no banco de dados, para isso cada classe da model representa uma tabela do banco de dados.</li>
+<li>View - É a comunicação entre a Model e a Template. É nela que há o tratamento de informações recebidas e o retorno para o usuário.</li>
+<li>Template - É a parte da visão de usuário. Geralmente usa HTML, CSS, javascript, etc. Normalmente é focada na apresentação da aplicação para o usuário.</li>
+</ul>
+<h3 id="22-graphql">2.2 GraphQL</h3>
+<p>GraphQL é uma linguagem de busca para APIs que fornece uma descrição completa dos dados da API e dispoẽ o poder de solicitar exatamento o que o usuário necessita. Tais funcionalidades contribuem na eficiência e velocidade no desenvolvimento de aplicações.</p>
+<h3 id="221-graphene-python">2.2.1 Graphene-Python</h3>
+<p>Graphene-Python é uma biblioteca que oferece as funcionalidades do GraphQL para o Python. Seu objetivo principal é dispor uma rica API para facilitar o desenvolvimento de aplicações.</p>
+<h3 id="222-graphene-django">2.2.2 Graphene-Django</h3>
+<p>Graphene-Django é construído em cima do Graphene. Fornece uma camada de abstração adicional que torna mais fácil implementar GraphQl em um projeto Django.</p>
+<h3 id="23-vuejs">2.3 Vue.js</h3>
+<p>Vue é um framework progressivo do JavaScript de código aberto para construir interfaces de usuários. Diferente de outros frameworks, Vue é projetado desde o ínicio para ser adotável de forma incremental. O Vue também pode funcionar como uma estrutura de aplicativos web capaz de alimentar aplicativos avançados de um única página.</p>
+<h2 id="3-objetivos-e-restricoes-da-arquitetura">3. Objetivos e Restrições da Arquitetura</h2>
+<h3 id="31-objetivos">3.1 Objetivos</h3>
+<ul>
+<li>Deve ser possível estruturar o condomínio (blocos e apartamentos) e cadastrar moradores manualmente;</li>
+<li>Fornecer a funcionalidade de autenticação de usuário, morador e visitante, via voz;</li>
+<li>O sistema deve estabelecer uma comunicação com o usuário via áudio, de forma a colher informações necessárias para autorização da entrada;</li>
+<li>Deve ser possível fazer o cadastro de um visitante via voz;</li>
+<li>É necessário ter uma comunicação com o morador com o intuito de notificar a chegada de um visitante;</li>
+<li>O morador deverá ter o poder se permitir ou não a entrada de um visitante que o referencia.</li>
+</ul>
+<h3 id="32-restricoes">3.2 Restrições</h3>
+<ul>
+<li>O hardware deve estar conectado a internet.</li>
+<li>O sistema deve estar integrado ao banco de dados para a autenticação dos usuários.</li>
+<li>O sistema deve estar integrado a um bot no Telegram para interação com os usuários.</li>
+<li>Os usuários moradores devem ter o aplicativo Telegram instalado e internet para a comunicação com o sistema via bot.</li>
+<li>O hardware deve ter um microfone para a gravação de voz, pois precisa-se da voz para a autenticação.</li>
+</ul>
+<h2 id="4-visao-logica">4. Visão Lógica</h2>
+<h3 id="41-visao-geral">4.1 Visão Geral</h3>
+<p>A portaria virtual Alohomora está sendo construída em Django, utilizando da ferramenta de busca GraphQL, integrada com Graphene-Django. O objetivo principal ao usar o Django é ter uma organização que facilite o trabalho e a adaptação do grupo. O GraphQL fornece velocidade na busca de dados e eficiência.</p>
+<h3 id="42-diagrama-de-relacoes">4.2 Diagrama de Relações</h3>
+<p><img alt="Diagrama_Relações" src="https://imgur.com/vDmAmoT.png" /></p>
+<h3 id="43-diagrama-de-pacotes">4.3 Diagrama de Pacotes</h3>
+<p><img alt="Diagrama_Pacotes" src="https://imgur.com/Tx87mx5.png" /></p>
+<h2 id="5-qualidade">5. Qualidade</h2>
+<ul>
+<li>Utilização de algorítimos otimizados para autenticação de usuário pelas voz.</li>
+<li>Utilização de boas práticas no desenvolvimento do projeto.</li>
+<li>Utilização de ferramentas que garantem velocidade e produtividade, como o GraphQL e Django.</li>
+<li>Facilidade para integração com outras bibliotecas e serviços.</li>
+<li>Fornecer um produto final o mais eficiente e otimizado possível.</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../doc_visao/" title="Documento de visão" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Documento de visão
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../gerencia/TAP/" title="Termo de abertura do projeto" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Termo de abertura do projeto
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
