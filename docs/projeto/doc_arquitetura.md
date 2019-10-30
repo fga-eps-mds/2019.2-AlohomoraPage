@@ -9,7 +9,8 @@
 |  26/09/2019  | 1.0 | Criação da primeira versão do documento | Paulo Batista, Rodrigo Lima, Victor Gonçalves |
 |  01/10/2019  | 1.1 | Revisão de erros ortográficos e sintaxe | João Luis Baraky, Victor Jorge Gonçalves |
 | 06/10/2019 | 1.2 | Incremento de uma explicação básica do que é significa MVT | Rodrigo Lima, João Luis Baraky |
-| 07/10/2019 | 1.2 | Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5| João Luis Baraky, Rodrigo Lima |
+| 07/10/2019 | 1.2 | Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5 | João Luis Baraky, Rodrigo Lima |
+| 30/10/2019 | 1.3 | Revisão do documento | Mateus Nóbrega |
 
 ## Sumário
 __[1. Introdução](#1-introducao)__ \
@@ -38,7 +39,7 @@ __[5. Qualidade](#5-qualidade)__
 
 ## 1. Introdução
 ### 1.1 Objetivo
-Este documento pretende mostrar a arquitetura utilizada da portaria virtual Alohomora, e mostrar aos envolvidos cada parte da aplicação. Destina-se transmitir aos interessados as decisões arquiteturais que foram tomadas.
+Este documento pretende mostrar a arquitetura utilizada da portaria virtual Alohomora e mostrar aos envolvidos cada parte da aplicação. Destina-se transmitir aos interessados as decisões arquiteturais que foram tomadas.
 
 ### 1.2 Escopo
 Este documento fornece uma visão da arquitetura do Alohomora, um sistema de portaria virtual.
@@ -50,7 +51,7 @@ Alohomora, é um projeto realizado para as disciplinas Métodos de Desenvolvimen
 | API | Application Programming Interface |
 | MDS | Métodos de Desenvolvimento de Software |
 | EPS | Engenharia de Produto de Software |
-|MVT|Model, View, Template|
+| MVT | Model, View, Template |
 
 ### 1.4 Referências
 Sistema de Registro em Curso - Documento de Arquitetura de Software; Disponível em: [http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm](http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm). Acesso em: 26 de setembro de 2019.
@@ -58,7 +59,7 @@ PATROCÍNIO, Sofia; GOUVEIA, Micaella; PEREIRA, Samuel; TAIRA, Luis; MUNIZ, Aman
 
 ## 2. Representação da Arquitetura
 ### 2.1 Django
-Django é um Python Web framework de alto-nível que encoraja o desenvolvimento rápido e organizado. O framework enfatiza a reusabilidade e conectividade de componentes, sendo assim,utiliza-se menos código.
+Django é uma framework web escrita em Python que encoraja o desenvolvimento rápido e organizado. O framework enfatiza a reusabilidade e conectividade de componentes, sendo assim, utiliza-se menos código.
 Aplica-se a arquitetura Model-View-Template (MVT).
 ### 2.1.1 MVT
 * Model - É a parte que representa as classes, além de ser a parte responsavel por ler e escrever informações no banco de dados, para isso cada classe da model representa uma tabela do banco de dados.
