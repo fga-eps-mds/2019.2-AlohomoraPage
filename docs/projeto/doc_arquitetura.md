@@ -78,15 +78,20 @@ Django é uma framework web escrita em Python que encoraja o desenvolvimento rá
 
 
 ### 2.3 GraphQL
-GraphQL é uma linguagem de busca para APIs que fornece uma descrição completa dos dados da API e dispoẽ o poder de solicitar exatamento o que o usuário necessita. Tais funcionalidades contribuem na eficiência e velocidade no desenvolvimento de aplicações.
+GraphQL é uma linguagem de busca para APIs que fornece uma descrição completa dos dados da API, permitindo que o usuário consulte exatamente o que ele precisa. Tais funcionalidades contribuem na eficiência e velocidade no desenvolvimento de aplicações.
 
-#### 2.3.1 Graphene-Python
-Graphene-Python é uma biblioteca que oferece as funcionalidades do GraphQL para o Python. Seu objetivo principal é dispor uma rica API para facilitar o desenvolvimento de aplicações.
+#### 2.3.1 Graphene
+Graphene Python é uma biblioteca que oferece as ferramentas necessárias para implementar uma API GraphQL em Python. Ela permite que os dados que o seu serviço providenciará sejam definidos usando código Python.
 
+### 2.4 Telegram
+
+Telegram é uma aplicação multiplataforma de troca de mensagens instantâneas baseada na nuvem. Focada em segurança e performance, permite que o usuário envie texto, imagens, fotos, mensagens de áudios e arquivos de qualquer tipo. Ele também providencia uma API para que desenvolvedores possam implementar bots que interajam com usuários.
+
+<!---
 #### 2.3.2 Graphene-Django
 Graphene-Django é construído em cima do Graphene. Fornece uma camada de abstração adicional que torna mais fácil implementar GraphQl em um projeto Django.
 
-<!---
+
 ### 2.4 Vue.js
 Vue é um framework progressivo do JavaScript de código aberto para construir interfaces de usuários. Diferente de outros frameworks, Vue é projetado desde o ínicio para ser adotável de forma incremental. O Vue também pode funcionar como uma estrutura de aplicativos web capaz de alimentar aplicativos avançados de um única página.
 -->
