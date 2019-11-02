@@ -39,7 +39,7 @@ __[5. Qualidade](#5-qualidade)__
 
 ## 1. Introdução
 ### 1.1 Objetivo
-Este documento pretende mostrar a arquitetura utilizada da portaria virtual Alohomora e mostrar aos envolvidos cada parte da aplicação. Destina-se transmitir aos interessados as decisões arquiteturais que foram tomadas.
+Este documento pretende mostrar a arquitetura utilizada da portaria virtual Alohomora, mostrar aos envolvidos cada parte da aplicação e transmitir aos interessados as decisões arquiteturais que foram tomadas.
 
 ### 1.2 Escopo
 Este documento fornece uma visão da arquitetura do Alohomora, um sistema de portaria virtual.
@@ -62,6 +62,10 @@ Padrões Arquiteturais MVC X Arquitetura do Django; Disponível em: [https://git
 
 HIROSHI, Lucas; MARQUES, Guilherme; RODRIGUES, Natália; BORGES, Felipe; NÓBREGA, Mateus. ReceitaMais - Documento de Arquitetura. Disponível em: <https://github.com/fga-eps-mds/2017.2-Receita-Mais/wiki/Documento-de-Arquitetura>. Acesso em: 30 de outubro de 2019.
 
+GraphQL vs REST: Overview; Disponível em: <https://phil.tech/api/2017/01/24/graphql-vs-rest-overview/>. Acesso em: 30 de outubro de 2019.
+
+Why use GraphQL, good and bad reasons. Disponível em: <https://honest.engineering/posts/why-use-graphql-good-and-bad-reasons>. Acesso em 30 de outubro de 2019.
+
 ## 2. Representação da Arquitetura
 
 ### 2.1 Diagrama de Relações
@@ -69,7 +73,7 @@ HIROSHI, Lucas; MARQUES, Guilherme; RODRIGUES, Natália; BORGES, Felipe; NÓBREG
 ![Diagrama_Relações](https://imgur.com/vDmAmoT.png)
 
 ### 2.2 Django
-Django é uma framework web escrita em Python que encoraja o desenvolvimento rápido e organizado. A framework enfatiza a reusabilidade e conectividade de componentes, sendo assim, utiliza-se menos código. No Django, é utilizada a  arquitetura Model-View-Template (MVT), que é uma variação da arquitetura Model-View-Controller (MVC).
+Django é uma framework web escrita em Python que encoraja o desenvolvimento rápido e organizado. A framework enfatiza a reusabilidade e conectividade de componentes, assim, diminuindo a quantidade de código e facilitando a criação de sistemas mais complexos. No Django, é utilizada a  arquitetura Model-View-Template (MVT), que é uma variação da arquitetura Model-View-Controller (MVC).
 
 #### 2.2.1 MVT
 * Model - É a parte que define o banco de dados, suas classes e como elas se comportam, métodos para manipulação do banco de dados e as validações aplicáveis (regras de negócio).
@@ -78,7 +82,7 @@ Django é uma framework web escrita em Python que encoraja o desenvolvimento rá
 
 
 ### 2.3 GraphQL
-GraphQL é uma linguagem de busca para APIs que fornece uma descrição completa dos dados da API, permitindo que o usuário consulte exatamente o que ele precisa. Tais funcionalidades contribuem na eficiência e velocidade no desenvolvimento de aplicações.
+GraphQL é uma linguagem de busca e de manipulação de dados para APIs que permite o usuário estruturar os dados que ele necessita. A linguagem oferece uma flexibilidade e uma maior facilidade em lidar com APIs mais complexas do que outras soluções. A gama de funcionalidades contribui na eficiência e velocidade no desenvolvimento de aplicações.
 
 #### 2.3.1 Graphene
 Graphene Python é uma biblioteca que oferece as ferramentas necessárias para implementar uma API GraphQL em Python. Ela permite que os dados que o seu serviço providenciará sejam definidos usando código Python.
@@ -99,6 +103,7 @@ Vue é um framework progressivo do JavaScript de código aberto para construir i
 ## 3. Objetivos e Restrições da Arquitetura
 
 ### 3.1 Objetivos
+- O sistema deve garantir a privacidade dos dados inseridos no banco de dados
 - Deve ser possível estruturar o condomínio (blocos e apartamentos) e cadastrar moradores manualmente;
 - Fornecer a funcionalidade de autenticação de usuário, morador e visitante, via voz;
 - O sistema deve estabelecer uma comunicação com o usuário via áudio, de forma a colher informações necessárias para autorização da entrada;
