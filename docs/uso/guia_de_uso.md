@@ -1,8 +1,20 @@
-# Comunicação
+# Guia de uso
 
-A comunicação com a aplicação é baseada em GraphQL e utiliza o caminho  **/graphql**. Você pode encontrar mais detalhes sobre o GraphQL [aqui](https://graphql.org/).
+Aqui você encontra detalhes sobre como utilizar cada ferramenta disponibilizada na API.
 
-## CRUD
+## Conteúdo
+- 1 - [Como funciona a comunicação](#1-comunicação)
+- 2 - [CRUD](#2-crud)
+    - 2.1 - [Morador](#morador)
+        - 2.1.1 - [Criando um morador](#criando-um-morador)
+        - 2.1.2 - [Modificando os dados de um morador](#2.1.2-modificando-os-dados-de-um-morador)
+        - 2.1.3 - [Deletando um morador](#2.1.3-deletando-um-morador) 
+
+## 1 - Comunicação
+
+A comunicação com a API é baseada em GraphQL e utiliza a rota padrão  **/graphql**. Você pode encontrar mais detalhes sobre o GraphQL [aqui](https://graphql.org/).
+
+## 2 - CRUD
 
 A aplicação conta com um mecanismo de ***crud*** para:
 - [Morador](#morador)
@@ -31,7 +43,8 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 > ***block***: o bloco no qual o morador pertence
 > ***voiceData***: o vetor do audio do morador dizendo a frase de autenticação
 
-#### Criando um morador
+<a name="criando-um-morador"></a>
+#### 2.1.1 Criando um morador
 
 ```graphql
 mutation createResident(
@@ -69,7 +82,7 @@ mutation createResident(
 ```
 > Note que ***voiceData*** é passado como uma string, neste caso, deve-se enviar o vetor do áudio como um JSON.
 
-#### Atualizando os dados de um morador
+#### 2.1.2 - Modificando os dados de um morador
 ```graphql
 mutation updateResident (
     $completeName: String,
@@ -106,7 +119,7 @@ mutation updateResident (
         }
 }
 ```
-#### Deletando um morador 
+#### 2.1.3 - Deletando um morador 
 
 ```graphql
 mutation deleteResident ($email: String!) {
