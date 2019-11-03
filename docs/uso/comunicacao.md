@@ -7,7 +7,7 @@ A comunicação com a aplicação é baseada em GraphQL e utiliza o caminho  **/
 A aplicação conta com um mecanismo de ***crud*** para:
 - [Morador](#morador)
 - [Visitante](#visitante)
-- [Funcionarios](#funcionarios)
+- [Serviços](#serviço)
 - [Bloco](#bloco)
 - [Apartamento](#apartamento)
 
@@ -172,15 +172,17 @@ mutation deleteVisitor ($cpf: String!) {
 ```
 *Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
-### Funcionarios
+### Serviço
 
-Um funcionário é uma entidade que representa tanto os funcionários do condomínio quanto funcionários terceiros, como entregadores de comida e encanadores por exemplo. Um funcionário, a nível de dados, é representado pelo seguinte conjunto de varíaveis
-> ***completeName***: o nome do funcionário
-> ***email***: o email do funcionário
-> ***password***: a senha do funcionário
+Um *serviço* é uma entidade que serve para representar pessoas físicas ou jurídicas cujo interesse é unicamente a prestação de serviços ao condomínio ou a um morador em específico. 
+
+A nível de dados, um serviço é representado pelo seguintes atributos:
+> ***completeName***: o nome do funcionário ou da empresa
+> ***email***: o email do funcionário ou da empresa
+> ***password***: a senha do funcionário ou da empresa 
 
 #### Criando um funcionário
-
+> Disponível apenas para **superuser**
 ```graphql
 mutation createService (
     $completeName: String!,
@@ -199,9 +201,10 @@ mutation createService (
         }
     }
 ```
-> Note que aqui estamos usuando email e senha.
 
-#### Atualizando os dados de um funcionário
+
+#### Atualizando os dados de um *serviço*
+> Necessário **login** como serviço
 ```graphql
 mutation updateService(
         $completeName: String,
@@ -220,9 +223,10 @@ mutation updateService(
         }
     }
 ```
+Neste caso a busca pelo *serviço* em específico será feita através dos **dados de login**. Os **valores originais** de cada atributo do serviço serão **substituídos pelos valores fornecidos** através da mutation. Caso não seja desejável mudar um atributo em específico, apenas o omita na mutation.
 
 #### Deletando um funcionário
-
+> Disponível apenas para **superuser**
 ```graphql
 mutation deleteService ($email: String!) {
         deleteService (email: $email) {
@@ -235,10 +239,10 @@ mutation deleteService ($email: String!) {
 
 ### Bloco
 
-Um bloco é uma entidade que representa uma certa área do condomínio. O bloco por padrão, a nível de dados, é representado por um **número**.
+Um bloco é uma entidade que representa uma certa área do condomínio. O bloco por padrão, a nível de dados, é representado pelo atributo *número*.
 
 #### Criando um bloco
-
+> Dispon;ivel apenas para **superuser**
 ```graphql
 mutation createBlock ($number: String) {
         createBlock (number: $number) {
@@ -246,17 +250,27 @@ mutation createBlock ($number: String) {
         }
     }
 ```
+Note que o atributo *number* pode conter letras e símbolos em sua composição.
 
 #### Atualizando os dados de um bloco
+> Disponível apenas para **superuser**
 ```graphql
-mutation updateBlock ($number: String!) {
-    updateBlock (number: $number) {
+mutation updateBlock (
+    $number: String!,
+    $blockNumber: String!
+    ){
+    updateBlock (
+        number: $number,
+        blockNumber: $blockNumber
+        ){
         number
     }
 }
 ```
+Neste caso a variável ***blockNumber*** será utilizada para procurar o bloco desejado, e o valor do atributo ***number*** será mudado para o valor da variável **$number** enviada através da mutation.
 
 #### Deletando um bloco
+> Disponível apenas para **superuser**
 ```graphql
 mutation deleteBlock ($blockNumber: String!) {
     deleteBlock (blockNumber: $blockNumber) {
@@ -266,15 +280,17 @@ mutation deleteBlock ($blockNumber: String!) {
 ```
 *Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
+---
+
 ### Apartamento
 
-Um apartamento é uma entidade que representa uma casa ou um apartamento do condomínio. Um apartamento é representado por um **número** e está diretamente associado a um bloco.
+Um *apartamento* é uma entidade que representa uma unidade de moradia do condomínio. Um apartamento é representado pelo atributo *número* e está diretamente associado a um bloco.
 
 #### Criando um apartamento
-
+> Disponível apenas para **superuser**
 ```graphql
 mutation createApartment(
-    $number: String,
+    $number: String!,
     $blockNumber: String,
     ){
         createApartment(
@@ -283,15 +299,19 @@ mutation createApartment(
         ){
             number
             blockNumber
+            block{
+                number
+            }
         }
     }
 ```
+Note que o atributo número pode conter letras e símbolos em sua composição. Você pode associar um apartamento a um bloco simplesmente informando o número do bloco desejado.
 
 #### Atualizando os dados de um apartamento
 ```graphql
 mutation updateApartment(
-        $number: String!,
-        $apartmentNumber: String!,
+    $number: String!,
+    $apartmentNumber: String!,
     ){
         updateApartment(
             number: $number,
@@ -299,13 +319,21 @@ mutation updateApartment(
         ){
             number
             apartmentNumber
+            apartment{
+                number
+                block{
+                    number
+                }
+            }
         }
     }
 ```
+Neste caso, a variável ***apartmentNumber*** será usada para procurar o apartamento desejado e mudará o valor do atributo ***number*** para o valor da variável **$number** enviada através da mutation.
 
 #### Deletando um apartamento
+> Disponível apenas para **superuser**
 ```graphql
-mutation deleteApartment ($apartmentNumber: Int!){
+mutation deleteApartment ($apartmentNumber: String!) {
     deleteApartment (apartmentNumber: $apartmentNumber) {
         apartmentNumber
     }
