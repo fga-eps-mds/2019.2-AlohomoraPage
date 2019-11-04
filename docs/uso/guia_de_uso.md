@@ -1,6 +1,6 @@
 # Guia de uso
 
-Aqui você encontra detalhes sobre como utilizar cada ferramenta disponibilizada na API.
+Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, bem como a maneiras de utiliza-las.
 
 ## Conteúdo
 - 1 - [Como funciona a comunicação](#1-comunicação)
@@ -19,8 +19,9 @@ Aqui você encontra detalhes sobre como utilizar cada ferramenta disponibilizada
         - 2.3.3 - [Deletando um serviço](#233-deletando-um-serviço)
     - 2.4 - [Bloco](#24-bloco)
         - 2.4.1 - [Criando um bloco](#241-criando-um-bloco)
-        - 2.4.2 - [Modificando os dados de um bloco](#242-modificando-os-dados-de-um-bloco)
-        - 2.4.3 - [Deletando um bloco](#243-deletando-um-bloco)
+        - 2.4.2 - [Consultando um bloco](#242-consultando-um-bloco)
+        - 2.4.3 - [Modificando os dados de um bloco](#243-modificando-os-dados-de-um-bloco)
+        - 2.4.4 - [Deletando um bloco](#244-deletando-um-bloco)
     - 2.5 - [Apartamento](#25-apartamento)
         - 2.5.1 - [Criando um Apartamento](#251-criando-um-apartamento)
         - 2.5.2 - [Consultando um apartamento](#252-consultando-um-apartamento)
@@ -313,7 +314,28 @@ mutation createBlock ($number: String!) {
 ```
 Note que o atributo *number* pode conter letras e símbolos em sua composição.
 
-#### 2.4.2 - Modificando os dados de um bloco
+### 2.4.2 - Consultando um bloco
+
+Para consultar um bloco específico
+```graphql
+query block($number: String!){
+    block(number: $number){
+        number
+    }
+}
+```
+Para consultar todos os blocos
+```graphql
+query allBlocks{
+    allBlocks{
+        block{
+            number
+        }
+    }
+}
+```
+
+### 2.4.3 - Modificando os dados de um bloco
 > Disponível apenas para **superuser**
 ```graphql
 mutation updateBlock (
@@ -333,7 +355,7 @@ mutation updateBlock (
 ```
 Neste caso a variável ***blockNumber*** será utilizada para procurar o bloco desejado, e o valor do atributo ***number*** do bloco será mudado para o valor da variável **$number** enviada através da mutation.
 
-#### 2.4.3 - Deletando um bloco
+### 2.4.4 - Deletando um bloco
 > Disponível apenas para **superuser**
 ```graphql
 mutation deleteBlock ($blockNumber: String!) {
@@ -345,11 +367,11 @@ mutation deleteBlock ($blockNumber: String!) {
 *Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
-### 2.5 - Apartamento
+## 2.5 - Apartamento
 
 Um *apartamento* é uma entidade que representa uma unidade de moradia do condomínio. Um apartamento é representado pelo atributo *número* e está diretamente associado a um bloco.
 
-#### 2.5.1 - Criando um apartamento
+### 2.5.1 - Criando um apartamento
 > Disponível apenas para **superuser**
 ```graphql
 mutation createApartment(
@@ -370,7 +392,7 @@ mutation createApartment(
 ```
 Note que o atributo número pode conter letras e símbolos em sua composição. Você pode associar um apartamento a um bloco simplesmente informando o número do bloco desejado.
 
-#### 2.5.2 - Consultando um apartamento
+### 2.5.2 - Consultando um apartamento
 
 Para consultar um apartamento em específico:
 ```graphql
@@ -395,19 +417,17 @@ Para consultar **todos** os apartamentos:
 ```graphql
 query allApartments{
     allApartments{
-        [
-            apartment{
+        apartment{
+            number
+            block{
                 number
-                block{
-                    number
-                }
             }
-        ]
+        }
     }
 }
 ```
 
-#### 2.5.3 - Modificando os dados de um apartamento
+### 2.5.3 - Modificando os dados de um apartamento
 ```graphql
 mutation updateApartment(
     $number: String!,
