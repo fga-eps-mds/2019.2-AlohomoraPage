@@ -7,16 +7,19 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
 - 2 - [CRUD](#2-crud)
     - 2.1 - [Morador](#21-morador)
         - 2.1.1 - [Criando um morador](#211-criando-um-morador)
-        - 2.1.2 - [Modificando os dados de um morador](#212-modificando-os-dados-de-um-morador)
-        - 2.1.3 - [Deletando um morador](#213-deletando-um-morador)
+        - 2.1.2 - [Consultando um morador](#212-consultando-um-morador)
+        - 2.1.3 - [Modificando os dados de um morador](#213-modificando-os-dados-de-um-morador)
+        - 2.1.4 - [Deletando um morador](#214-deletando-um-morador)
     - 2.2 - [Visitante](#22-visitante)
         - 2.2.1 - [Criando um visitante](#221-criando-um-visitante)
-        - 2.2.2 - [Modificando os dados de um visitante](#222-modificando-os-dados-de-um-visitante)
-        - 2.2.3 - [Deletando um visitante](#223-deletando-um-visitante)
+        - 2.2.2 - [Consultando um visitante](#222-consultando-um-visitante)
+        - 2.2.3 - [Modificando os dados de um visitante](#223-modificando-os-dados-de-um-visitante)
+        - 2.2.4 - [Deletando um visitante](#224-deletando-um-visitante)
     - 2.3 - [Serviços](#23-serviços)
         - 2.3.1 - [Criando um serviço](#231-criando-um-serviço)
-        - 2.3.2 - [Modificando os dados de um serviço](#232-modificando-os-dados-de-um-serviço)
-        - 2.3.3 - [Deletando um serviço](#233-deletando-um-serviço)
+        - 2.3.2 - [Consultando um serviço](#232-consultando-um-serviço)
+        - 2.3.3 - [Modificando os dados de um serviço](#233-modificando-os-dados-de-um-serviço)
+        - 2.3.4 - [Deletando um serviço](#234-deletando-um-serviço)
     - 2.4 - [Bloco](#24-bloco)
         - 2.4.1 - [Criando um bloco](#241-criando-um-bloco)
         - 2.4.2 - [Consultando um bloco](#242-consultando-um-bloco)
@@ -27,31 +30,25 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
         - 2.5.2 - [Consultando um apartamento](#252-consultando-um-apartamento)
         - 2.5.3 - [Modificando os dados de um apartamento](#253-modificando-os-dados-de-um-apartamento)
         - 2.5.4 - [Deletando um apartamento](#254-deletando-um-apartamento)
-- 3 - 
+- 3 - [Autênticação de usuários](#3-autênticação-de-usuários)
+    - 3.1 - [Autênticação de morador](#31-autênticação-de-morador)
 
-## 1 - Comunicação
+# 1 - Comunicação
 
-A comunicação com a API é baseada em GraphQL e utiliza a rota padrão  **/graphql**. Você pode encontrar mais detalhes sobre o GraphQL [aqui](https://graphql.org/).
+A comunicação com a API é baseada em GraphQL e utiliza a rota padrão  **/graphql**. Você pode encontrar mais detalhes sobre como utilizar o GraphQL [aqui](https://graphql.org/).
 
-## 2 - CRUD
+# 2 - CRUD
 
-A aplicação conta com um mecanismo de ***crud*** para:
+A aplicação conta com um mecanismo de ***CRUD*** para:
 - [Morador](#morador)
 - [Visitante](#visitante)
 - [Serviços](#serviço)
 - [Bloco](#bloco)
 - [Apartamento](#apartamento)
 
-## Autênticação
-
-A aplicação conta com um sistema de autênticação do morador por biometria de voz. [Veja mais](#autenticação).
-
-## Logs de entrada
-A aplicação ainda possui um sistema de rastreamento de entradas. [Veja mais](#entradas).
-
 ---
 
-### 2.1 - Morador
+## 2.1 - Morador
 
 Um morador é uma entidade que está vinculada a um bloco e a um apartamento e que possui direito à autenticação a fim de realizar [*entradas*](#entradas). Por padrão, um morador, a nível de dados, é representado pelo seguinte conjunto de atributos:
 > ***completeName***: o nome completo do morador
@@ -63,7 +60,7 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 > ***voiceData***: o vetor de características [MFCC](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum) da voz
 > ***mfccAudioSpeakingName***: o vetor de características [MFCC](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum) do áudio do morador dizendo o próprio nome
 
-#### 2.1.1 - Criando um morador
+### 2.1.1 - Criando um morador
 Para criar um morador, além dos dados básicos como: nome, CPF, email, telefone e etc., serão necessários dois atributos vitais, estes são:
 - > ***voiceData***: 
 *O vetor de áudio do morador dizendo uma frase comum a todos os moradores do condomínio.*
@@ -119,7 +116,36 @@ mutation createResident(
 
 > Note que ***voiceData*** e ***mfccAudioSpeakingName*** são passados como uma string, neste caso, deve-se enviar o vetor como um ***JSON***.
 
-#### 2.1.2 - Modificando os dados de um morador
+### 2.1.2 - Consultando um morador
+> Disponível apenas para **superuser**
+
+Para consultar um morador específico
+```graphql
+query resident(
+    $email: String,
+    $cpf: String,
+    ){
+        resident(
+            email: $email,
+            cpf: $cpf
+        ){
+            resident{
+                    completeName
+                    email
+                    cpf
+                    phone
+                    apartment{
+                        number
+                        block{
+                            number
+                        }
+                    }
+                }
+        }
+    }
+```
+
+### 2.1.3 - Modificando os dados de um morador
 > Necessário **login** como **morador**.
 
 Assuma que todos os campos enviados nesta mutation serão atualizados no registro do morador com os valores fornecidos.
@@ -160,7 +186,7 @@ mutation updateResident (
         }
 }
 ```
-#### 2.1.3 - Deletando um morador 
+### 2.1.4 - Deletando um morador 
 > Disponível apenas para **superuser**
 
 ```graphql
@@ -172,13 +198,13 @@ mutation deleteResident ($email: String!) {
 *Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
-### 2.2 - Visitante
+## 2.2 - Visitante
 
 Um visitante é uma entidade que representa exatamente o que o seu próprio nome sugere, um visitante. Essa entidade existe para possibilitar a interação de visitantes com o sistema de portaria a fim de garantir rastreabilidade e segurança. Por padrão, um visitante é representado pelos seguintes atributos:
 > ***completeName***: o nome completo do visitante
 > ***cpf***: o cpf do visitante
 
-#### 2.2.1 - Criando um visitante
+### 2.2.1 - Criando um visitante
 > Disponível apenas para **superuser**
 
 ```graphql
@@ -198,7 +224,33 @@ mutation createVisitor(
     }
 ```
 
-#### 2.2.2 - Modificando os dados de um visitante
+### 2.2.2 - Consultando um visitante
+> Disponível apenas para **superuser**
+
+Consultando um *visitante* específico
+```graphql
+query visitor($cpf: String,){
+    visitor(cpf: $cpf){
+        visitor{
+            completeName
+            cpf
+        }
+    }
+}
+```
+Consultando todos os visitantes
+```graphql
+query allVisitors{
+    allVisitors{
+        visitor{
+            completeName
+            cpf
+        }
+    }
+}
+```
+
+### 2.2.3 - Modificando os dados de um visitante
 > Disponível apenas para **superuser**
 
 O CPF atual deve ser passado para que seja possível realizar a busca pelo visitante no banco de dados. Caso seja necessário alterar o CPF, envie o novo valor através do campo *newCpf*
@@ -221,7 +273,7 @@ mutation updateVisitor(
     }
 ```
 
-#### 2.2.3 - Deletando um visitante
+### 2.2.4 - Deletando um visitante
 > Disponível apenas para **superuser**
 ```graphql
 mutation deleteVisitor ($cpf: String!) {
@@ -233,7 +285,7 @@ mutation deleteVisitor ($cpf: String!) {
 *Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
-### 2.3 - Serviços
+## 2.3 - Serviços
 
 Um *serviço* é uma entidade que serve para representar pessoas físicas ou jurídicas cujo interesse é unicamente a prestação de serviços ao condomínio ou a um morador em específico. 
 
@@ -242,7 +294,7 @@ A nível de dados, um serviço é representado pelo seguintes atributos:
 > ***email***: o email do funcionário ou da empresa
 > ***password***: a senha do funcionário ou da empresa 
 
-#### 2.3.1 - Criando um serviço
+### 2.3.1 - Criando um serviço
 > Disponível apenas para **superuser**
 ```graphql
 mutation createService (
@@ -263,8 +315,38 @@ mutation createService (
     }
 ```
 
+### 2.3.2 - Consultando um serviço
+Para consultar um *serviço* específico
+```graphql
+query service(
+    $completeName: String,
+    $email: String,
+    ){
+        service(
+            completeName: $completeName,
+            email: $email
+        ){
+            service{
+                completeName
+                email
+            }
+        }
+    }
+```
 
-#### 2.3.2 - Modificando os dados de um serviço
+Para consultar todos os serviços
+```graphql
+query services{
+    services{
+        service{
+            completeName
+            email
+        }
+    }
+}
+```
+
+### 2.3.3 - Modificando os dados de um serviço
 > Necessário **login** como serviço
 
 Neste caso a busca pelo *serviço* em específico será feita através dos **dados de login**. O **valor original** de cada atributo do serviço será **substituído pelo valor fornecido** através da mutation. Caso não seja desejável mudar um atributo em específico, apenas o omita na mutation.
@@ -287,7 +369,7 @@ mutation updateService(
     }
 ```
 
-#### 2.3.3 - Deletando um serviço
+### 2.3.4 - Deletando um serviço
 > Disponível apenas para **superuser**
 ```graphql
 mutation deleteService ($email: String!) {
@@ -299,11 +381,11 @@ mutation deleteService ($email: String!) {
 *Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
-### 2.4 - Bloco
+## 2.4 - Bloco
 
 Um bloco é uma entidade que representa uma certa área do condomínio. O bloco por padrão, a nível de dados, é representado pelo atributo *número*.
 
-#### 2.4.1 - Criando um bloco
+### 2.4.1 - Criando um bloco
 > Disponível apenas para **superuser**
 ```graphql
 mutation createBlock ($number: String!) {
@@ -462,29 +544,51 @@ mutation deleteApartment ($apartmentNumber: String!) {
 
 ---
 
-## Entradas
+# 3 - Autênticação de usuários
 
-*Entradas* é uma entidade que visa garantir **rastreabilidade na movimentação do condomínio**, guardando as **informações da entrada**. Com entradas, é possível saber **quem entrou, quando entrou e para onde foi**.
+*Alohomora* conta com ferramentas que possibilitam a criação de um sistema de autênticação de usuários. Tais ferramentas podem ser utilizadas para compor desde simples sistemas de autênticação (**aceitar/rejeitar**), até sistemas complexos de várias etapas.
 
-Entradas são divididas em dois tipos: ***Entradas de morador*** e ***Entradas de visitante***.
+## 3.1 - Autênticação de morador
 
-Para entradas de morador, cada entrada está associada a um morador do condomínio, já para entradas de visitante, um visitante será associado.
+A autênticação de morador pode ser realizada através da **biometria de voz**. Tal coisa é possível pois cada morador, a nível de dados, possui um atributo de características da própria voz.
 
-Em ambos os tipos existe um destino associado, um apartamento específico.
+A *query* requere dois campos
 
-> *Obs*: entradas de visitante precisam ser diretamente aprovadas pelo morador
+> ***cpf***: O CPF do morador
+> ***voiceData***: O vetor de áudio, em formato JSON, do morador dizendo a frase comum  
 
-#### Criando entradas de morador
+No fim, a query retorna **True** caso a voz pertence ao morador e **False** caso contrário
+```graphql
+query voiceBelongsResident(
+    $cpf: String!,
+    $voiceData: String!
+    ){
+        voiceBelongsResident(
+            cpf: $cpf,
+            voiceData: $voiceData
+        )
+    }
+```
+
+# 4 - Logs de entrada
+
+*Alohomora* fornece uma ferramenta de registro para entradas de pessoas. Uma *Entrada* é uma entidade que possui relacionamento direto a um apartamento e a um morador ou a um apartamento e um visitante. A *Entrada* também contém a data e a hora em que foi gerada.
+
+## 4.1 - Entradas de morador
+### 4.1.1 - Criando uma entrada de morador
+
 ```graphql
 mutation createEntry(
-    $residentCpf: String,
-    $apartmentNumber: String,
+    $residentCpf: String!,
+    $blockNumber: String!,
+    $apartmentNumber: String!
     ){
         createEntry(
             residentCpf: $residentCpf,
+            blockNumber: $blockNumber,
             apartmentNumber: $apartmentNumber
         ){
-            resident {
+            resident{
                 completeName
                 email
                 phone
@@ -507,6 +611,159 @@ mutation createEntry(
         }
     }
 ```
+> **Obs**: A data registrada é a data do instante em que a *Entrada* for criada.
 
-## Autenticação
+### 4.1.2 - Consultando uma entrada de morador
 
+Consultando todas as entradas
+```graphql
+query entries{
+    entries{
+        entry{
+            resident{
+                completeName
+                email
+                phone
+                cpf
+                apartment{
+                    number
+                    block{
+                        number
+                    }
+                }
+            }
+            apartment{
+                number
+                block{
+                    number
+                }
+            }
+            date
+        }
+    }
+}
+```
+
+## 4.2 - Entradas de visitante
+
+### 4.2.1 - Criando uma entrada de visitante
+
+A *Entrada* para *Visitante* possui um atributo extra em relação à *Entrada* para *Morador*, que é o ***pending***. Este atributo indica se a entrada ainda está pendente.
+
+```graphql
+mutation createEntryVisitor(
+    $visitorCpf: String,
+    $blockNumber: String,
+    $apartmentNumber: String,
+    $pending: Boolean,
+    ){
+        createEntryVisitor(
+            visitorCpf: $visitorCpf,
+            blockNumber: $blockNumber,
+            apartmentNumber: $apartmentNumber,
+            pending: $pending
+        ){
+            visitor{
+                completeName
+                cpf
+            }
+            apartment{
+                number
+                block{
+                    number
+                }
+            }
+            pending
+        }
+    }
+```
+> **Obs**: A data associada representa a hora em que a entrada foi criada, independentemente do valor do atributo *pending*. Ou seja, podem haver futuras discordâncias entre a hora em que a *Entrada* foi criada e a hora em que o visitante realmente entrou.
+
+### 4.2.3 - Consultando uma entrada de visitante
+
+Consultando todas as entradas
+```graphql
+query allEntriesVisitors{
+    allEntriesVisitors{
+        entryVisitor{
+            visitor{
+                completeName
+                cpf
+            }
+            apartment{
+                number
+                block{
+                    number
+                }
+            }
+            date
+        }
+    }
+}
+```
+
+Consultando todas as entradas pendentes para um apartamento
+```graphql
+query entriesVisitorsPending(
+    $blockNumber: String,
+    $apartmentNumber: String,
+    ){
+        entriesVisitorsPending(
+            blockNumber: $blockNumber,
+            apartmentNumber: $apartmentNumber
+            ){
+                entryVisitor{
+                    visitor{
+                        completeName
+                        cpf
+                    }
+                    apartment{
+                        number
+                        block{
+                            number
+                        }
+                    }
+                    date
+                }
+            }
+    }
+```
+
+Consultando todas as entradas de visitante ou de um apartamento.
+
+```graphql
+query entriesVisitor(
+    $cpf: String,
+    $blockNumber: String,
+    $apartmentNumber: String
+    ){
+        entriesVisitor(
+            cpf: $cpf,
+            blockNumber: $blockNumber,
+            apartmentNumber: $apartmentNumber
+        ){
+            entryVisitor{
+                visitor{
+                        completeName
+                        cpf
+                    }
+                    apartment{
+                        number
+                        block{
+                            number
+                        }
+                    }
+                    date
+                }
+            }
+        }
+    }
+```
+
+Aqui o **comportamento** da *query* irá depender dos **argumentos passados**.
+
+Caso você envie o *cpf*, *blockNumber* e o *apartmentNumber* simultâneamente, serão retornadas todas as entradas do visitante detentor do cpf fornecido ao apartamento indicado pelos argumentos *blockNumber* e *apartmentNumber*.
+
+Caso você envie apenas *blockNumber* e *apartmentNumber*, serão retornadas todas as entradas relacionadas ao apartamento descrito por *blockNumber* e *apartmentNumber*.
+
+Caso você envie apenas o *cpf*, serão retornadas todas as entradas relacionadas ao visitante detentor desse CPF.
