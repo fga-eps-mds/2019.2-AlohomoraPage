@@ -66,22 +66,30 @@ A aplicação conta com um mecanismo de ***CRUD*** para as entidades vitais do n
 
 ## 2.1 - Morador
 
-Um morador é uma entidade que está vinculada a um bloco e a um apartamento e que possui direito à autenticação a fim de realizar [*entradas*](#entradas). Por padrão, um morador, a nível de dados, é representado pelo seguinte conjunto de atributos:
+Um morador é uma entidade que está vinculada a um bloco e a um apartamento e que possui direito à autenticação a fim de realizar [*entradas*](#4---logs-de-entrada). Por padrão, um morador, a nível de dados, é representado pelo seguinte conjunto de atributos:
 > ***completeName***: o nome completo do morador
+>
 > ***email***: o email do morador
+>
 > ***phone***: o número de telefone do morador
+>
 > ***cpf***: o número do CPF do morador
+>
 > ***apartment***: o apartamento no qual o morador reside
+>
 > ***block***: o bloco no qual o morador pertence
+>
 > ***voiceData***: o vetor de características [MFCC](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum) da voz
+>
 > ***mfccAudioSpeakingName***: o vetor de características [MFCC](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum) do áudio do morador dizendo o próprio nome
 
 ### 2.1.1 - Criando um morador
 Para criar um morador, além dos dados básicos como: nome, CPF, email, telefone e etc., serão necessários dois atributos vitais, estes são:
-- > ***voiceData***: 
+> ***voiceData***: 
 *O vetor de áudio do morador dizendo uma frase comum a todos os moradores do condomínio.*
 Aqui é recomendado que todos os áudios enviados tenham a taxa de amostragem igual a 16000. Tenha cuidado também para que os áudios não contenham grandes pausas, partes silenciosas ou cortes durante a fala.
-- > ***mfccAudioSpeakingName***:
+
+> ***mfccAudioSpeakingName***:
 *O vetor de características MFCC de um áudio do morador dizendo o próprio nome.*
 As mesmas recomendações em relação ao atributo *voiceData* devem ser consideradas aqui.
 
@@ -159,6 +167,24 @@ query resident(
     }
 ```
 
+Para consultar todos os moradores
+```graphql
+query residents{
+    residents{
+    completeName
+        email
+        cpf
+        phone
+        apartment{
+            number
+            block{
+                number
+            }
+        }
+    }
+}
+```
+
 ### 2.1.3 - Modificando os dados de um morador
 > Necessário **login** como **morador**.
 
@@ -212,8 +238,9 @@ mutation deleteResident ($email: String!) {
 ---
 ## 2.2 - Visitante
 
-Um visitante é uma entidade que representa exatamente o que o seu próprio nome sugere, um visitante. Essa entidade existe para possibilitar a interação de visitantes com o sistema de portaria a fim de garantir rastreabilidade e segurança. Por padrão, um visitante é representado pelos seguintes atributos:
+Um visitante é uma entidade que representa exatamente o que o seu próprio nome sugere, um visitante. Essa entidade existe para possibilitar a interação de visitantes com o sistema da portaria, a fim de garantir rastreabilidade e segurança. Por padrão, um visitante é representado pelos seguintes atributos:
 > ***completeName***: o nome completo do visitante
+>
 > ***cpf***: o cpf do visitante
 
 ### 2.2.1 - Criando um visitante
@@ -299,7 +326,9 @@ Um *serviço* é uma entidade que serve para representar pessoas físicas ou jur
 
 A nível de dados, um serviço é representado pelo seguintes atributos:
 > ***completeName***: o nome do funcionário ou da empresa
+>
 > ***email***: o email do funcionário ou da empresa
+>
 > ***password***: a senha do funcionário ou da empresa 
 
 ### 2.3.1 - Criando um serviço
@@ -334,10 +363,8 @@ query service(
             completeName: $completeName,
             email: $email
         ){
-            service{
-                completeName
-                email
-            }
+            completeName
+            email
         }
     }
 ```
@@ -355,7 +382,7 @@ query services{
 ### 2.3.3 - Modificando os dados de um serviço
 > Necessário **login** como serviço
 
-Neste caso a busca pelo *serviço* em específico será feita através dos **dados de login**. O **valor original** de cada atributo do serviço será **substituído pelo valor fornecido** através da mutation. Caso não seja desejável mudar um atributo em específico, apenas o omita na mutation.
+Neste caso a busca pelo *serviço* em específico será feita através dos **dados de login**. O **valor original** de cada atributo do serviço será **substituído pelo valor fornecido** através da mutation. Caso não seja desejável mudar um atributo específico, apenas o omita na mutation.
 ```graphql
 mutation updateService(
         $serviceData: ServiceInput,
@@ -393,7 +420,7 @@ mutation deleteService ($serviceEmail: String!) {
 ---
 ## 2.4 - Bloco
 
-Um bloco é uma entidade que representa uma certa área do condomínio. O bloco por padrão, a nível de dados, é representado pelo atributo *número*.
+Um *Bloco* é uma entidade que representa uma certa área do condomínio. O *Bloco* por padrão, a nível de dados, é representado pelo atributo *número*.
 
 ### 2.4.1 - Criando um bloco
 > Disponível apenas para **[administrador](#5---administração)**
@@ -459,7 +486,7 @@ mutation deleteBlock ($blockNumber: String!) {
 ---
 ## 2.5 - Apartamento
 
-Um *apartamento* é uma entidade que representa uma unidade de moradia do condomínio. Um apartamento é representado pelo atributo *número* e está diretamente associado a um bloco.
+Um *Apartamento* é uma entidade que representa uma unidade de moradia do condomínio. Um apartamento é representado pelo atributo *number* e está diretamente associado a um bloco.
 
 ### 2.5.1 - Criando um apartamento
 > Disponível apenas para **[administrador](#5---administração)**
@@ -480,7 +507,7 @@ mutation createApartment(
         }
     }
 ```
-Note que o atributo número pode conter letras e símbolos em sua composição. Você pode associar um apartamento a um bloco simplesmente informando o número do bloco desejado.
+Note que o atributo *number* pode conter letras e símbolos em sua composição. Você pode associar um apartamento a um bloco simplesmente informando o número do bloco desejado.
 
 ### 2.5.2 - Consultando um apartamento
 
@@ -505,11 +532,9 @@ Para consultar **todos** os apartamentos:
 ```graphql
 query allApartments{
     allApartments{
-        apartment{
+        number
+        block{
             number
-            block{
-                number
-            }
         }
     }
 }
@@ -561,7 +586,8 @@ A autênticação de morador pode ser realizada através da **biometria de voz**
 A *query* requere dois campos
 
 > ***cpf***: O CPF do morador
-> ***voiceData***: O vetor de áudio, em formato JSON, do morador dizendo a frase comum  
+>
+> ***voiceData***: O vetor de áudio, em formato JSON, do morador dizendo uma frase comum a todos os moradores do condomínio  
 
 No fim, a query retorna **True** caso a voz pertence ao morador e **False** caso contrário
 ```graphql
@@ -685,7 +711,7 @@ mutation createEntryVisitor(
         }
     }
 ```
-> **Obs**: A data associada representa a hora em que a entrada foi criada, independentemente do valor do atributo *pending*. Ou seja, podem haver futuras discordâncias entre a hora em que a *Entrada* foi criada e a hora em que o visitante realmente entrou.
+> **Obs**: A data associada representa a hora em que a entrada foi criada, independentemente do valor do atributo *pending*. Ou seja, podem ocorrer discordâncias entre o instante em que a *Entrada* foi criada e o instante em que o visitante realmente entrou.
 
 ### 4.2.2 - Consultando uma entrada de visitante
 
@@ -830,7 +856,7 @@ query allAdmins{
 ``` 
 Consultando administradores com filtro
 ```graphql
-query admin($creatorEmail: String, $adminEmail) {
+query admin($creatorEmail: String, $adminEmail: String) {
     admin(creatorEmail: $creatorEmail, adminEmail: $adminEmail) {
         email
     }
