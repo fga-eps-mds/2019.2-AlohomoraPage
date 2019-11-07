@@ -3,71 +3,71 @@
 Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, bem como a maneiras de utiliza-las.
 
 ## Conteúdo
-- 1 - [Como funciona a comunicação](#1---comunicação)
-- 2 - [CRUD](#2---crud)
-    - 2.1 - [Morador](#21---morador)
-        - 2.1.1 - [Criando um morador](#211---criando-um-morador)
-        - 2.1.2 - [Consultando um morador](#212---consultando-um-morador)
-        - 2.1.3 - [Modificando os dados de um morador](#213---modificando-os-dados-de-um-morador)
-        - 2.1.4 - [Deletando um morador](#214---deletando-um-morador)
-    - 2.2 - [Visitante](#22---visitante)
-        - 2.2.1 - [Criando um visitante](#221---criando-um-visitante)
-        - 2.2.2 - [Consultando um visitante](#222---consultando-um-visitante)
-        - 2.2.3 - [Modificando os dados de um visitante](#223---modificando-os-dados-de-um-visitante)
-        - 2.2.4 - [Deletando um visitante](#224---deletando-um-visitante)
-    - 2.3 - [Serviços](#23---serviços)
-        - 2.3.1 - [Criando um serviço](#231---criando-um-serviço)
-        - 2.3.2 - [Consultando um serviço](#232---consultando-um-serviço)
-        - 2.3.3 - [Modificando os dados de um serviço](#233---modificando-os-dados-de-um-serviço)
-        - 2.3.4 - [Deletando um serviço](#234---deletando-um-serviço)
-    - 2.4 - [Bloco](#24---bloco)
-        - 2.4.1 - [Criando um bloco](#241---criando-um-bloco)
-        - 2.4.2 - [Consultando um bloco](#242---consultando-um-bloco)
-        - 2.4.3 - [Modificando os dados de um bloco](#243---modificando-os-dados-de-um-bloco)
-        - 2.4.4 - [Deletando um bloco](#244---deletando-um-bloco)
-    - 2.5 - [Apartamento](#25---apartamento)
-        - 2.5.1 - [Criando um Apartamento](#251---criando-um-apartamento)
-        - 2.5.2 - [Consultando um apartamento](#252---consultando-um-apartamento)
-        - 2.5.3 - [Modificando os dados de um apartamento](#253---modificando-os-dados-de-um-apartamento)
-        - 2.5.4 - [Deletando um apartamento](#254---deletando-um-apartamento)
-- 3 - [Autênticação de usuários](#3---autênticação-de-usuários)
-    - 3.1 - [Autênticação de morador](#31---autênticação-de-morador)
-- 4 - [Logs de entrada](#4---logs-de-entrada)
-    - 4.1 - [Entradas de morador](#41---entradas-de-morador)
-        - 4.1.1 - [Criando uma entrada de morador](#411---criando-uma-entrada-de-morador)
-        - 4.1.2 - [Consultando uma entrada de morador](#412---consultando-uma-entrada-de-morador)
-    - 4.2 - [Entradas de visitante](#42---entradas-de-visitante)
-        - 4.2.1 - [Criando uma entrada de visitante](#421---criando-uma-entrada-de-visitante)
-        - 4.2.2 - [Consultando uma entrada de visitante](#422---consultando-uma-entrada-de-visitante)
-- 5 - [Administração](#5---administração)
-    - 5.1 - [Criando e deletando administradores](#51---criando-e-deletando-administradores)
-        - 5.1.1 - [Criando um administrador](#511---criando-um-administrador)
-        - 5.1.2 - [Deletando um administrador](#512---deletando-um-administrador)
-        - 5.1.3 - [Consultando um administrador](#513---consultando-um-administrador)
-    - 5.2 - [Gerênciando conta de usuários](#52---gerênciando-conta-de-usuários)
-        - 5.2.1 - [Ativando um usuário](#521---ativando-um-usuário)
-        - 5.2.2 - [Desativando um usuário](#522---desativando-um-usuário)
-        - 5.2.3 - [Consultando usuários desativados](#523---consultando-usuários-desativados)
-- 6 - [Exemplos](#6---exemplos)
-    - 6.1 - [Criando um morador](#61---criando-um-morador)
-    - 6.2 - [Realizando comunicação como administrador](#62---realizando-comunicação-como-administrador)
+- 1 - [Como funciona a comunicação](#1-comunicação)
+- 2 - [CRUD](#2-crud)
+    - 2.1 - [Morador](#21-morador)
+        - 2.1.1 - [Criando um morador](#211-criando-um-morador)
+        - 2.1.2 - [Consultando um morador](#212-consultando-um-morador)
+        - 2.1.3 - [Modificando os dados de um morador](#213-modificando-os-dados-de-um-morador)
+        - 2.1.4 - [Deletando um morador](#214-deletando-um-morador)
+    - 2.2 - [Visitante](#22-visitante)
+        - 2.2.1 - [Criando um visitante](#221-criando-um-visitante)
+        - 2.2.2 - [Consultando um visitante](#222-consultando-um-visitante)
+        - 2.2.3 - [Modificando os dados de um visitante](#223-modificando-os-dados-de-um-visitante)
+        - 2.2.4 - [Deletando um visitante](#224-deletando-um-visitante)
+    - 2.3 - [Serviços](#23-serviços)
+        - 2.3.1 - [Criando um serviço](#231-criando-um-serviço)
+        - 2.3.2 - [Consultando um serviço](#232-consultando-um-serviço)
+        - 2.3.3 - [Modificando os dados de um serviço](#233-modificando-os-dados-de-um-serviço)
+        - 2.3.4 - [Deletando um serviço](#234-deletando-um-serviço)
+    - 2.4 - [Bloco](#24-bloco)
+        - 2.4.1 - [Criando um bloco](#241-criando-um-bloco)
+        - 2.4.2 - [Consultando um bloco](#242-consultando-um-bloco)
+        - 2.4.3 - [Modificando os dados de um bloco](#243-modificando-os-dados-de-um-bloco)
+        - 2.4.4 - [Deletando um bloco](#244-deletando-um-bloco)
+    - 2.5 - [Apartamento](#25-apartamento)
+        - 2.5.1 - [Criando um Apartamento](#251-criando-um-apartamento)
+        - 2.5.2 - [Consultando um apartamento](#252-consultando-um-apartamento)
+        - 2.5.3 - [Modificando os dados de um apartamento](#253-modificando-os-dados-de-um-apartamento)
+        - 2.5.4 - [Deletando um apartamento](#254-deletando-um-apartamento)
+- 3 - [Autênticação de usuários](#3-autênticação-de-usuários)
+    - 3.1 - [Autênticação de morador](#31-autênticação-de-morador)
+- 4 - [Logs de entrada](#4-logs-de-entrada)
+    - 4.1 - [Entradas de morador](#41-entradas-de-morador)
+        - 4.1.1 - [Criando uma entrada de morador](#411-criando-uma-entrada-de-morador)
+        - 4.1.2 - [Consultando uma entrada de morador](#412-consultando-uma-entrada-de-morador)
+    - 4.2 - [Entradas de visitante](#42-entradas-de-visitante)
+        - 4.2.1 - [Criando uma entrada de visitante](#421-criando-uma-entrada-de-visitante)
+        - 4.2.2 - [Consultando uma entrada de visitante](#422-consultando-uma-entrada-de-visitante)
+- 5 - [Administração](#5-administração)
+    - 5.1 - [Criando e deletando administradores](#51-criando-e-deletando-administradores)
+        - 5.1.1 - [Criando um administrador](#511-criando-um-administrador)
+        - 5.1.2 - [Deletando um administrador](#512-deletando-um-administrador)
+        - 5.1.3 - [Consultando um administrador](#513-consultando-um-administrador)
+    - 5.2 - [Gerênciando conta de usuários](#52-gerênciando-conta-de-usuários)
+        - 5.2.1 - [Ativando um usuário](#521-ativando-um-usuário)
+        - 5.2.2 - [Desativando um usuário](#522-desativando-um-usuário)
+        - 5.2.3 - [Consultando usuários desativados](#523-consultando-usuários-desativados)
+- 6 - [Exemplos](#6-exemplos)
+    - 6.1 - [Criando um morador](#61-criando-um-morador)
+    - 6.2 - [Realizando comunicação como administrador](#62-realizando-comunicação-como-administrador)
 
 
 ---
 
-# 1 - Comunicação
+# 1. Comunicação
 
 A comunicação com a API é baseada em GraphQL e utiliza a rota padrão  **/graphql**. Você pode encontrar mais detalhes sobre como utilizar o GraphQL [aqui](https://graphql.org/).
 
 ---
 
-# 2 - CRUD
+# 2. CRUD
 
 A aplicação conta com um mecanismo de ***CRUD*** para as entidades vitais do negócio. Com este CRUD é garantida a consistência da lógica do sistema.
 
 ---
 
-## 2.1 - Morador
+## 2.1. Morador
 
 Um morador é uma entidade que está vinculada a um bloco e a um apartamento e que possui direito à autenticação a fim de realizar [*entradas*](#4---logs-de-entrada). Por padrão, um morador, a nível de dados, é representado pelo seguinte conjunto de atributos:
 > ***completeName***: o nome completo do morador
@@ -86,7 +86,7 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 >
 > ***mfccAudioSpeakingName***: o vetor de características [MFCC](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum) do áudio do morador dizendo o próprio nome
 
-### 2.1.1 - Criando um morador
+### 2.1.1. Criando um morador
 Para criar um morador, além dos dados básicos como: nome, CPF, email, telefone e etc., serão necessários dois atributos vitais, estes são:
 > ***voiceData***: 
 *O vetor de áudio do morador dizendo uma frase comum a todos os moradores do condomínio.*
@@ -143,7 +143,7 @@ mutation createResident(
 
 > Note que ***voiceData*** e ***mfccAudioSpeakingName*** são passados como uma string, neste caso, deve-se enviar o vetor como um ***JSON***.
 
-### 2.1.2 - Consultando um morador
+### 2.1.2. Consultando um morador
 > Disponível apenas para **[administrador](#5---administração)**
 
 Para consultar um morador específico
@@ -188,7 +188,7 @@ query residents{
 }
 ```
 
-### 2.1.3 - Modificando os dados de um morador
+### 2.1.3. Modificando os dados de um morador
 > Necessário **login** como **morador**.
 
 Assuma que todos os campos enviados nesta mutation serão atualizados no registro do morador com os valores fornecidos.
@@ -225,7 +225,7 @@ type ResidentInput {
 }
 ```
 
-### 2.1.4 - Deletando um morador 
+### 2.1.4. Deletando um morador 
 > Disponível apenas para **[administrador](#5---administração)**
 
 ```graphql
@@ -238,14 +238,14 @@ mutation deleteResident ($email: String!) {
 
 
 ---
-## 2.2 - Visitante
+## 2.2. Visitante
 
 Um visitante é uma entidade que representa exatamente o que o seu próprio nome sugere, um visitante. Essa entidade existe para possibilitar a interação de visitantes com o sistema da portaria, a fim de garantir rastreabilidade e segurança. Por padrão, um visitante é representado pelos seguintes atributos:
 > ***completeName***: o nome completo do visitante
 >
 > ***cpf***: o cpf do visitante
 
-### 2.2.1 - Criando um visitante
+### 2.2.1. Criando um visitante
 > Disponível apenas para **[administrador](#5---administração)**
 
 ```graphql
@@ -265,7 +265,7 @@ mutation createVisitor(
     }
 ```
 
-### 2.2.2 - Consultando um visitante
+### 2.2.2. Consultando um visitante
 > Disponível apenas para **[administrador](#5---administração)**
 
 Consultando um *visitante* específico
@@ -287,7 +287,7 @@ query allVisitors{
 }
 ```
 
-### 2.2.3 - Modificando os dados de um visitante
+### 2.2.3. Modificando os dados de um visitante
 > Disponível apenas para **[administrador](#5---administração)**
 
 O CPF atual deve ser passado para que seja possível realizar a busca pelo visitante no banco de dados. Caso seja necessário alterar o CPF, envie o novo valor através do campo *newCpf*
@@ -310,7 +310,7 @@ mutation updateVisitor(
     }
 ```
 
-### 2.2.4 - Deletando um visitante
+### 2.2.4. Deletando um visitante
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation deleteVisitor ($cpf: String!) {
@@ -321,7 +321,7 @@ mutation deleteVisitor ($cpf: String!) {
 ```
 
 ---
-## 2.3 - Serviços
+## 2.3. Serviços
 
 Um *serviço* é uma entidade que serve para representar pessoas físicas ou jurídicas cujo interesse é unicamente a prestação de serviços ao condomínio ou a um morador em específico. 
 
@@ -332,7 +332,7 @@ A nível de dados, um serviço é representado pelo seguintes atributos:
 >
 > ***password***: a senha do funcionário ou da empresa 
 
-### 2.3.1 - Criando um serviço
+### 2.3.1. Criando um serviço
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation createService (
@@ -353,7 +353,7 @@ mutation createService (
     }
 ```
 
-### 2.3.2 - Consultando um serviço
+### 2.3.2. Consultando um serviço
 Para consultar um *serviço* específico
 ```graphql
 query service(
@@ -380,7 +380,7 @@ query services{
 }
 ```
 
-### 2.3.3 - Modificando os dados de um serviço
+### 2.3.3. Modificando os dados de um serviço
 > Necessário **login** como serviço
 
 Neste caso a busca pelo *serviço* em específico será feita através dos **dados de login**. O **valor original** de cada atributo do serviço será **substituído pelo valor fornecido** através da mutation. Caso não seja desejável mudar um atributo específico, apenas o omita na mutation.
@@ -407,7 +407,7 @@ type ServiceInput {
 }
 ```
 
-### 2.3.4 - Deletando um serviço
+### 2.3.4. Deletando um serviço
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation deleteService ($serviceEmail: String!) {
@@ -418,11 +418,11 @@ mutation deleteService ($serviceEmail: String!) {
 ```
 
 ---
-## 2.4 - Bloco
+## 2.4. Bloco
 
 Um *Bloco* é uma entidade que representa uma certa área do condomínio. O *Bloco* por padrão, a nível de dados, é representado pelo atributo *número*.
 
-### 2.4.1 - Criando um bloco
+### 2.4.1. Criando um bloco
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation createBlock ($number: String!) {
@@ -433,7 +433,7 @@ mutation createBlock ($number: String!) {
 ```
 Note que o atributo *number* pode conter letras e símbolos em sua composição.
 
-### 2.4.2 - Consultando um bloco
+### 2.4.2. Consultando um bloco
 
 Para consultar um bloco específico
 ```graphql
@@ -452,7 +452,7 @@ query allBlocks{
 }
 ```
 
-### 2.4.3 - Modificando os dados de um bloco
+### 2.4.3. Modificando os dados de um bloco
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation updateBlock (
@@ -472,7 +472,7 @@ mutation updateBlock (
 ```
 Neste caso a variável ***blockNumber*** será utilizada para procurar o bloco desejado, e o valor do atributo ***number*** do bloco será mudado para o valor da variável **$number** enviada através da mutation.
 
-### 2.4.4 - Deletando um bloco
+### 2.4.4. Deletando um bloco
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation deleteBlock ($blockNumber: String!) {
@@ -483,11 +483,11 @@ mutation deleteBlock ($blockNumber: String!) {
 ```
 
 ---
-## 2.5 - Apartamento
+## 2.5. Apartamento
 
 Um *Apartamento* é uma entidade que representa uma unidade de moradia do condomínio. Um apartamento é representado pelo atributo *number* e está diretamente associado a um bloco.
 
-### 2.5.1 - Criando um apartamento
+### 2.5.1. Criando um apartamento
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation createApartment(
@@ -508,7 +508,7 @@ mutation createApartment(
 ```
 Note que o atributo *number* pode conter letras e símbolos em sua composição. Você pode associar um apartamento a um bloco simplesmente informando o número do bloco desejado.
 
-### 2.5.2 - Consultando um apartamento
+### 2.5.2. Consultando um apartamento
 
 Para consultar um apartamento em específico:
 ```graphql
@@ -539,7 +539,7 @@ query allApartments{
 }
 ```
 
-### 2.5.3 - Modificando os dados de um apartamento
+### 2.5.3. Modificando os dados de um apartamento
 ```graphql
 mutation updateApartment(
     $number: String!,
@@ -562,7 +562,7 @@ mutation updateApartment(
 ```
 Neste caso, a variável ***apartmentNumber*** será usada para procurar o apartamento desejado e mudará o valor do atributo ***number*** do apartamento para o valor da variável **$number** enviada através da mutation.
 
-#### 2.5.4 - Deletando um apartamento
+#### 2.5.4. Deletando um apartamento
 > Disponível apenas para **[administrador](#5---administração)**
 ```graphql
 mutation deleteApartment ($apartmentNumber: String!) {
@@ -574,11 +574,11 @@ mutation deleteApartment ($apartmentNumber: String!) {
 
 ---
 
-# 3 - Autênticação de usuários
+# 3. Autênticação de usuários
 
 *Alohomora* conta com ferramentas que possibilitam a criação de um sistema de autênticação de usuários. Tais ferramentas podem ser utilizadas para compor desde simples sistemas de autênticação (**aceitar/rejeitar**), até sistemas complexos de várias etapas.
 
-## 3.1 - Autênticação de morador
+## 3.1. Autênticação de morador
 
 A autênticação de morador pode ser realizada através da **biometria de voz**. Tal coisa é possível pois cada morador, a nível de dados, possui um atributo de características da própria voz.
 
@@ -601,15 +601,15 @@ query voiceBelongsResident(
     }
 ```
 
-# 4 - Logs de entrada
+# 4. Logs de entrada
 
 *Alohomora* fornece uma ferramenta de registro para entradas de pessoas. Uma *Entrada* é uma entidade que possui relacionamento direto com um apartamento e com um morador ou com um apartamento e com um visitante. A *Entrada* também contém a data e a hora em que foi gerada.
 
-## 4.1 - Entradas de morador
+## 4.1. Entradas de morador
 
 Uma *Entrada de Morador* associa um morador a um apartamento em um determinado horário. *Entradas de morador* podem servir como histórico de acessos ao apartamento e consequentemente ao condomínio.
 
-### 4.1.1 - Criando uma entrada de morador
+### 4.1.1. Criando uma entrada de morador
 
 ```graphql
 mutation createEntry(
@@ -645,7 +645,7 @@ mutation createEntry(
 ```
 > **Obs**: A data registrada é a data do instante em que a *Entrada* for criada.
 
-### 4.1.2 - Consultando uma entrada de morador
+### 4.1.2. Consultando uma entrada de morador
 
 Consultando todas as entradas
 ```graphql
@@ -674,13 +674,13 @@ query entries{
 }
 ```
 
-## 4.2 - Entradas de visitante
+## 4.2. Entradas de visitante
 
 A *Entrada de Visitante* possui um atributo extra em relação à *Entrada de Morador*, que é o ***pending***. Este atributo indica se a entrada ainda está pendente.
 
 A *Entrada de Visitante* pode se comportar também como uma solicitação de entrada, uma vez que um visitante não deveria ter o direito de entrar no condomínio a qualquer momento, mas sim apenas quando este for autorizado.  
 
-### 4.2.1 - Criando uma entrada de visitante
+### 4.2.1. Criando uma entrada de visitante
 
 
 ```graphql
@@ -712,7 +712,7 @@ mutation createEntryVisitor(
 ```
 > **Obs**: A data associada representa a hora em que a entrada foi criada, independentemente do valor do atributo *pending*. Ou seja, podem ocorrer discordâncias entre o instante em que a *Entrada* foi criada e o instante em que o visitante realmente entrou.
 
-### 4.2.2 - Consultando uma entrada de visitante
+### 4.2.2. Consultando uma entrada de visitante
 
 Consultando todas as entradas
 ```graphql
@@ -799,13 +799,13 @@ Caso você envie apenas o *cpf*, serão retornadas todas as entradas relacionada
 
 ---
 
-# 5 - Administração
+# 5. Administração
 
 Como todo sistema, *Alohomora* possui algumas rotinas de administração de sistema. Um administrador no contexto dessa aplicação deveria ser alguém da equipe de gerência do condomínio.
 
 > Todas as funcionalidades que requerem **[administrador](#5---administração)** são destinadas ao administrador do sistema.
 
-## 5.1 - Criando e deletando administradores
+## 5.1. Criando e deletando administradores
 
 Por padrão a API já vem com uma conta de administrador criada. A partir dela, novas contas personalizadas podem ser criadas.
 
@@ -813,7 +813,7 @@ A conta padrão possui as seguintes credenciais:
 > .
 > .
 
-### 5.1.1 - Criando um administrador
+### 5.1.1. Criando um administrador
 
 > Disponível apenas para **[administrador](#5---administração)**
 
@@ -829,7 +829,7 @@ mutation createAdmin($email: String, $password: String) {
 }
 ```
 
-### 5.1.2 - Deletando um administrador
+### 5.1.2. Deletando um administrador
 
 > Disponível apenas para **[administrador](#5---administração)**
 
@@ -841,7 +841,7 @@ mutation deleteAdmin($email: String) {
 }
 ```
 
-### 5.1.3 - Consultando um administrador
+### 5.1.3. Consultando um administrador
 
 > Disponível apenas para **[administrador](#5---administração)**
 
@@ -865,11 +865,11 @@ Aqui você pode consultar todos o administradores criado pelo administrador dete
 
  Você pode também verificar se um determinado administrador criou um outro; nesse caso, basta enviar um valor para *creatorEmail* e para *adminEmail* simultâneamente.
 
-## 5.2 - Gerênciando conta de usuários
+## 5.2. Gerênciando conta de usuários
 
 Um administrador pode decidir se um determinado usuário possui validez no sistema. Caso um usuário não esteja em estado válido, este não poderá interagir com o sistema.
 
-### 5.2.1 - Ativando um usuário
+### 5.2.1. Ativando um usuário
 
 > Disponível apenas para **[administrador](#5---administração)**
 
@@ -889,7 +889,7 @@ mutation activateUser($userEmail: String) {
 }
 ``` 
 
-### 5.2.2 - Desativando um usuário
+### 5.2.2. Desativando um usuário
 
 > Disponível apenas para **[administrador](#5---administração)**
 
@@ -909,7 +909,7 @@ mutation deactivateUser($userEmail: String) {
 }
 ```
 
-### 5.2.3 - Consultando usuários desativados
+### 5.2.3. Consultando usuários desativados
 
 > Disponível apenas para **[administrador](#5---administração)**
 
@@ -926,11 +926,11 @@ query unactivesUsers {
 }
 ```
 
-# 6 - Exemplos
+# 6. Exemplos
 
 Nessa seção serão demonstrados vários casos de uso de algumas funcionalidades da API. Os códigos foram escritos em Python, assumindo que a aplicação esteja disponível em http://localhost:8000/graphql.
 
-## 6.1 - Criando um morador
+## 6.1. Criando um morador
 
 Aqui estaremos utilizando os módulos [*speaker verification toolkit*](https://pypi.org/project/speaker-verification-toolkit/) e [*librosa*](https://librosa.github.io/librosa/index.html)  para realizar as devidas manipulações sobre áudios.
 
@@ -1012,4 +1012,4 @@ variables = {
 response = requests.post(api_path, json={'query':query, 'variables':variables})
 ```
 
-## 6.2 - Realizando comunicação como administrador
+## 6.2. Realizando comunicação como administrador
