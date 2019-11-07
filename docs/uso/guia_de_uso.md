@@ -48,6 +48,9 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
         - 5.2.1 - [Ativando um usuário](#521---ativando-um-usuário)
         - 5.2.2 - [Desativando um usuário](#522---desativando-um-usuário)
         - 5.2.3 - [Consultando usuários desativados](#523---consultando-usuários-desativados)
+- 6 - [Exemplos](#6---exemplos)
+    - 6.1 - [Criando um morador](#61---criando-um-morador)
+    - 6.2 - [Realizando comunicação como administrador](#62---realizando-comunicação-como-administrador)
 
 
 ---
@@ -233,7 +236,6 @@ mutation deleteResident ($email: String!) {
 }
 ```
 
-*Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
 ## 2.2 - Visitante
@@ -317,7 +319,6 @@ mutation deleteVisitor ($cpf: String!) {
     }
 }
 ```
-*Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
 ## 2.3 - Serviços
@@ -415,7 +416,6 @@ mutation deleteService ($serviceEmail: String!) {
         }
     }
 ```
-*Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
 ## 2.4 - Bloco
@@ -481,7 +481,6 @@ mutation deleteBlock ($blockNumber: String!) {
     }
 }
 ```
-*Alguma dúvida? Confira os [exemplos](#exemplos)*!
 
 ---
 ## 2.5 - Apartamento
@@ -926,3 +925,91 @@ query unactivesUsers {
     }
 }
 ```
+
+# 6 - Exemplos
+
+Nessa seção serão demonstrados vários casos de uso de algumas funcionalidades da API. Os códigos foram escritos em Python, assumindo que a aplicação esteja disponível em http://localhost:8000/graphql.
+
+## 6.1 - Criando um morador
+
+Aqui estaremos utilizando os módulos [*speaker verification toolkit*](https://pypi.org/project/speaker-verification-toolkit/) e [*librosa*](https://librosa.github.io/librosa/index.html)  para realizar as devidas manipulações sobre áudios.
+
+```python
+import librosa
+import speaker_verification_toolkit.tools as svt
+
+api_path = 'http://localhost:8000/graphql'
+
+# Abrindo o audio do morador dizendo a frase comum de autenticacao. Sample rate de 16000
+phrase_audio, samplerate = librosa.load('resident_phrase.wav', sr=16000, mono=True)
+
+# Abrindo o audio do morador dizendo o proprio nome. Sample rate de 16000
+audio_speaking_name = librosa.load('audio_speaking_name.wav', sr=16000, mono=True)
+
+# Extraindo as caracteristicas MFCC
+mfcc_data = svt.extract_mfcc(phrase_audio)
+mfcc_audio_speaking_name = svt.extract_mfcc(audio_speaking_name)
+
+# Transformando em JSON
+mfcc_data = json.dumps(mfcc_data.tolist())
+mfcc_audio_speaking_name = json.dumps(mfcc_audio_speaking_name.tolist())
+
+query = '''
+    mutation createResident(
+        $completeName: String!,
+        $email: String!,
+        $phone: String!,
+        $cpf: String!,
+        $apartment: String!,
+        $block: String!,
+        $voiceData: String,
+        $mfccData: String,
+        $mfccAudioSpeakingName: String,
+        $password: String,
+        ){
+        createResident(
+            completeName: $completeName,
+            email: $email,
+            cpf: $cpf,
+            phone: $phone,
+            apartment: $apartment,
+            block: $block,
+            voiceData: $voiceData,
+            mfccData: $mfccData,
+            mfccAudioSpeakingName: $mfccAudioSpeakingName,
+            password: $password
+        ){
+            resident{
+                completeName
+                email
+                cpf
+                phone
+                apartment{
+                    number
+                    block{
+                        number
+                    }
+                }
+            }
+        }
+    }
+'''
+
+# Assumindo que os atributos foram previamente preenchidos:
+variables = {
+        'completeName': complete_name,
+        'email': email,
+        'phone': phone,
+        'cpf': cpf,
+        'apartment': apartment,
+        'block': block,
+        'mfccData': mfcc_data,
+        'mfccAudioSpeakingName': mfcc_audio_speaking_name,
+        'password': password
+    }
+
+# Finalmente realizando a comunicação com a API
+response = requests.post(api_path, json={'query':query, 'variables':variables})
+```
+
+## 6.2 - Realizando comunicação como administrador
