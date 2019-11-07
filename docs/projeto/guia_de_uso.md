@@ -50,9 +50,8 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
         - 5.2.3 - [Consultando usuários desativados](#523-consultando-usuários-desativados)
 - 6 - [Exemplos](#6-exemplos)
     - 6.1 - [Criando um morador](#61-criando-um-morador)
-    - 6.2 - [Realizando comunicação como administrador](#62-realizando-comunicação-como-administrador)
-
-
+    - 6.2 - [Realizando login](#62-realizando-login)
+    - 6.3 - [Verificando se o token está correto](#63-verificando-se-o-token-está-correto)
 ---
 
 # 1. Comunicação
@@ -88,7 +87,7 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 
 ### 2.1.1. Criando um morador
 Para criar um morador, além dos dados básicos como: nome, CPF, email, telefone e etc., serão necessários dois atributos vitais, estes são:
-> ***voiceData***: 
+> ***voiceData***:
 *O vetor de áudio do morador dizendo uma frase comum a todos os moradores do condomínio.*
 Aqui é recomendado que todos os áudios enviados tenham a taxa de amostragem igual a 16000. Tenha cuidado também para que os áudios não contenham grandes pausas, partes silenciosas ou cortes durante a fala.
 
@@ -225,7 +224,7 @@ type ResidentInput {
 }
 ```
 
-### 2.1.4. Deletando um morador 
+### 2.1.4. Deletando um morador
 > Disponível apenas para **[administrador](#5---administração)**
 
 ```graphql
@@ -323,14 +322,14 @@ mutation deleteVisitor ($cpf: String!) {
 ---
 ## 2.3. Serviços
 
-Um *serviço* é uma entidade que serve para representar pessoas físicas ou jurídicas cujo interesse é unicamente a prestação de serviços ao condomínio ou a um morador em específico. 
+Um *serviço* é uma entidade que serve para representar pessoas físicas ou jurídicas cujo interesse é unicamente a prestação de serviços ao condomínio ou a um morador em específico.
 
 A nível de dados, um serviço é representado pelo seguintes atributos:
 > ***completeName***: o nome do funcionário ou da empresa
 >
 > ***email***: o email do funcionário ou da empresa
 >
-> ***password***: a senha do funcionário ou da empresa 
+> ***password***: a senha do funcionário ou da empresa
 
 ### 2.3.1. Criando um serviço
 > Disponível apenas para **[administrador](#5---administração)**
@@ -852,7 +851,7 @@ query allAdmins{
         email
     }
 }
-``` 
+```
 Consultando administradores com filtro
 ```graphql
 query admin($creatorEmail: String, $adminEmail: String) {
@@ -887,7 +886,7 @@ mutation activateUser($userEmail: String) {
         }
     }
 }
-``` 
+```
 
 ### 5.2.2. Desativando um usuário
 
@@ -1012,4 +1011,23 @@ variables = {
 response = requests.post(api_path, json={'query':query, 'variables':variables})
 ```
 
-## 6.2. Realizando comunicação como administrador
+## 6.2. Realizando login
+Será necessário realizar uma mutation
+```
+mutation tokenAuth($email: String!, $password: String!){
+ tokenAuth(email: $email, password: $password){
+   token
+ }
+}
+```
+Com o token recebido apartir desta mutation deve ser copiado para o header, para fazer isso pode ser utilizado um programa chamado insomnia. Depois de feito essa etapa, já vai ser possível realizar tarefas com o tipo do usuário logado.
+
+## 6.3. Verificando se o token está correto
+```
+mutation verifyToken($token: String!){
+	verifyToken(token: $token){
+	payload
+	}
+}
+```
+Com o token recebido, é possível verificar qual conta o token está relacionado.
