@@ -10,6 +10,7 @@
 |  01/10/2019  | 1.1 | Revisão de erros ortográficos e sintaxe | João Luis Baraky, Victor Jorge Gonçalves |
 | 06/10/2019 | 1.2 | Incremento de uma explicação básica do que é significa MVT | Rodrigo Lima, João Luis Baraky |
 | 07/10/2019 | 1.2 | Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5| João Luis Baraky, Rodrigo Lima |
+| 09/11/2019 | 1.3 | Adição de alguns diagrama e atualização de outros| Matheus Nóbrega, Paulo Batista|
 
 ## Sumário
 __[1. Introdução](#1-introducao)__ \
@@ -27,13 +28,20 @@ __[2. Representação da Arquitetura](#2-representacao-da-arquitetura)__ \
 [2.3 Vue.js](#23-vuejs)
 
 __[3. Objetivos e Restrições da Arquitetura](#3-objetivos-e-restricoes-da-arquitetura)__ \
-[3.1 Objetivos](#31-objetivos)
+[3.1 Objetivos](#31-objetivos) \
 [3.2 Restrições](#32-restricoes)
 
-__[4. Visão Lógica](#4-visao-logica)__ \
-[4.1 Visão Geral](#41-visao-geral)
+__[4. Visão de Casos de Uso](#4-visao-de-casos-de-uso)__ \
 
-__[5. Qualidade](#5-qualidade)__
+__[5. Visão Lógica](#5-visao-logica)__ \
+[5.1 Visão Geral](#51-visao-geral) \
+[5.2 Diagrama de Relações](#52-diagrama-de-relacoes) \
+[5.3 Diagrama de pacotes](#53-diagrama-de-pacotes)
+
+__[6. Visão de implementação](#6-visao-de-implementacao)__ \
+[6.1 Diagrama das models](#61-diagrama-das-models)
+
+__[7. Qualidade](#7-qualidade)__
 
 
 ## 1. Introdução
@@ -94,19 +102,40 @@ Vue é um framework progressivo do JavaScript de código aberto para construir i
 - Os usuários moradores devem ter o aplicativo Telegram instalado e internet para a comunicação com o sistema via bot.
 - O hardware deve ter um microfone para a gravação de voz, pois precisa-se da voz para a autenticação.
 
-## 4. Visão Lógica
-### 4.1 Visão Geral
+## 4, Visão de Casos de Uso
+Os casos de uso relevantes para a arquitetura são:
+
+- Falar uma frase
+- Analisar a voz
+- Aceitar morador
+- Abrir porta
+- Aceitar visitante
+- Notificar o morador da chegada do visitante
+- Avisar a chegada
+- Gerenciar apartamentos
+- Gerenciar usuários
+- Ver entradas dos moradores e vistantes
+
+![Diagrama_casos_de_uso](../img/diagrama_casos_de_uso.png)
+
+## 5. Visão Lógica
+### 5.1 Visão Geral
 A portaria virtual Alohomora está sendo construída em Django, utilizando da ferramenta de busca GraphQL, integrada com Graphene-Django. O objetivo principal ao usar o Django é ter uma organização que facilite o trabalho e a adaptação do grupo. O GraphQL fornece velocidade na busca de dados e eficiência.
 
-### 4.2 Diagrama de Relações
+### 5.2 Diagrama de Relações
 
-![Diagrama_Relações](https://imgur.com/vDmAmoT.png)
+![Diagrama_Relações](../img/diagrama_de_relacoes.png)
 
-### 4.3 Diagrama de Pacotes
+### 5.3 Diagrama de Pacotes
 
-![Diagrama_Pacotes](https://imgur.com/Tx87mx5.png)
+![Diagrama_Pacotes](../img/diagrama_de_pacotes.png)
 
-## 5. Qualidade
+## 6. Visão de implementação
+### 6.1 Diagrama das models
+
+![Diagrama_de_classes](../img/diagrama_de_classes.png)
+
+## 7. Qualidade
 - Utilização de algorítimos otimizados para autenticação de usuário pelas voz.
 - Utilização de boas práticas no desenvolvimento do projeto.
 - Utilização de ferramentas que garantem velocidade e produtividade, como o GraphQL e Django.
