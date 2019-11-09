@@ -36,8 +36,8 @@ __[4. Visão de Casos de Uso](#4-visao-de-casos-de-uso)__ \
 __[5. Visão Lógica](#5-visao-logica)__ \
 [5.1 Visão Geral](#51-visao-geral) \
 [5.2 Diagrama de Relações](#52-diagrama-de-relacoes) \
+[5.2.1 Responsabilidades por etapa](#521-responsabilidades-por-etapa) \
 [5.3 Diagrama de pacotes](#53-diagrama-de-pacotes)
-
 __[6. Visão de implementação](#6-visao-de-implementacao)__ \
 [6.1 Diagrama das models](#61-diagrama-das-models)
 
@@ -90,8 +90,6 @@ Vue é um framework progressivo do JavaScript de código aberto para construir i
 ### 3.1 Objetivos
 - Deve ser possível estruturar o condomínio (blocos e apartamentos) e cadastrar moradores manualmente;
 - Fornecer a funcionalidade de autenticação de usuário, morador e visitante, via voz;
-- O sistema deve estabelecer uma comunicação com o usuário via áudio, de forma a colher informações necessárias para autorização da entrada;
-- Deve ser possível fazer o cadastro de um visitante via voz;
 - É necessário ter uma comunicação com o morador com o intuito de notificar a chegada de um visitante;
 - O morador deverá ter o poder se permitir ou não a entrada de um visitante que o referencia.
 
@@ -125,6 +123,20 @@ A portaria virtual Alohomora está sendo construída em Django, utilizando da fe
 ### 5.2 Diagrama de Relações
 
 ![Diagrama_Relações](../img/diagrama_de_relacoes.png)
+
+
+O morador interage com o AlohoBot para requisitar ou modificar alguma informação, e interage também com o interfone para fazer a autenticação por voz. Nos quais requisitam algum tipo de ação do sistema, assim a API processa a ação requirida.
+O graphQL a partir das mutations e queries, é o responsável por buscar e modificar as informações através da comunicação com a model, esta que se comunica com o banco de dados, e retorna o resultado para o bot ou interfone.
+
+### 5.2.1 Responsabilidades por etapa
+
+A etapa de comunicação do usuário com o AlohoBot deve conter não apenas classes responsáveis pelos componentes gráficos e visuais, mas também deve guardar as informações do usuário no banco de dados. Dessa forma, o código do bot vai estar desacoplado com o da API.
+
+No AlohoBot vai ser feito um request em forma de json para o graphql buscar ou modificar as informações no banco de dados. Pois no graphql é necessário que seja provido o corpo do JSON informando se vai estar performando uma query ou mutation. Apartir disso, já é possível retornar para o cliente as informações.
+
+Essa comunicação do AlohoBot com a API é protegida por um token.
+
+Na etapa de comunicação do usuário com o interfone vai ser feita com o uso de uma interface de comunicação baseado no Home Assistant que permite a sua integração com dispositivos de IoT. A partir do iot tem uma comunicação direta com a API, no qual a voz do usuário vai ser transformada pelo vetor de características da voz e passado para o algoritmo fastdtw, e então permitindo ou não a entrada do morador.
 
 ### 5.3 Diagrama de Pacotes
 
