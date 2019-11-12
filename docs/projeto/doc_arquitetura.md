@@ -9,7 +9,8 @@
 |  26/09/2019  | 1.0 | Criação da primeira versão do documento | Paulo Batista, Rodrigo Lima, Victor Gonçalves |
 |  01/10/2019  | 1.1 | Revisão de erros ortográficos e sintaxe | João Luis Baraky, Victor Jorge Gonçalves |
 | 06/10/2019 | 1.2 | Incremento de uma explicação básica do que é significa MVT | Rodrigo Lima, João Luis Baraky |
-| 07/10/2019 | 1.2 | Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5| João Luis Baraky, Rodrigo Lima |
+| 07/10/2019 | 1.2 | Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5 | João Luis Baraky, Rodrigo Lima |
+| 30/10/2019 | 1.3 | Revisão do documento | Mateus Nóbrega |
 
 ## Sumário
 __[1. Introdução](#1-introducao)__ \
@@ -23,8 +24,8 @@ __[2. Representação da Arquitetura](#2-representacao-da-arquitetura)__ \
 [2.1.1 MVT](#211-mvt)\
 [2.2 GraphQL](#22-graphql) \
 [2.2.1 Graphene-Python](#221-graphene-python) \
-[2.2.2 Graphene-Django](#222-graphene-django) \
-[2.3 Vue.js](#23-vuejs)
+[2.2.2 Graphene-Django](#222-graphene-django)
+<!---[2.3 Vue.js](#23-vuejs) -->
 
 __[3. Objetivos e Restrições da Arquitetura](#3-objetivos-e-restricoes-da-arquitetura)__ \
 [3.1 Objetivos](#31-objetivos)
@@ -38,11 +39,11 @@ __[5. Qualidade](#5-qualidade)__
 
 ## 1. Introdução
 ### 1.1 Objetivo
-Este documento pretende mostrar a arquitetura utilizada da portaria virtual Alohomora, e mostrar aos envolvidos cada parte da aplicação. Destina-se transmitir aos interessados as decisões arquiteturais que foram tomadas.
+Este documento pretende mostrar a arquitetura utilizada da portaria virtual Alohomora, mostrar aos envolvidos cada parte da aplicação e transmitir aos interessados as decisões arquiteturais que foram tomadas.
 
 ### 1.2 Escopo
 Este documento fornece uma visão da arquitetura do Alohomora, um sistema de portaria virtual.
-Alohomora, é um projeto realizado para as disciplinas Métodos de Desenvolvimento de Software(MDS) e Engenharia de Produto de Software(EPS), do curso Engenharia de Software da Faculdade UnB Gama (FGA) da Universidade de Brasília(UnB).
+Alohomora é um projeto realizado para as disciplinas Métodos de Desenvolvimento de Software (MDS) e Engenharia de Produto de Software (EPS), do curso de Engenharia de Software da Faculdade UnB Gama (FGA) da Universidade de Brasília (UnB).
 
 ### 1.3 Definições, Acrônimos e Abreviações
 | Acrônimo/Abreviação | Definição |
@@ -50,36 +51,59 @@ Alohomora, é um projeto realizado para as disciplinas Métodos de Desenvolvimen
 | API | Application Programming Interface |
 | MDS | Métodos de Desenvolvimento de Software |
 | EPS | Engenharia de Produto de Software |
-|MVT|Model, View, Template|
+| MVT | Model, View, Template |
 
 ### 1.4 Referências
 Sistema de Registro em Curso - Documento de Arquitetura de Software; Disponível em: [http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm](http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm). Acesso em: 26 de setembro de 2019.
-PATROCÍNIO, Sofia; GOUVEIA, Micaella; PEREIRA, Samuel; TAIRA, Luis; MUNIZ, Amanda. Chatbot Gaia: Arquitetura. Disponível em: [https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md](https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md). Acesso em: 26 de setembro de 2019. Padrões Arquiteturais MVC X Arquitetura do Django; Disponível em: [https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django](https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django). Acesso em: 05 de outubro de 2019.
+
+PATROCÍNIO, Sofia; GOUVEIA, Micaella; PEREIRA, Samuel; TAIRA, Luis; MUNIZ, Amanda. Chatbot Gaia: Arquitetura. Disponível em: [https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md](https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md). Acesso em: 26 de setembro de 2019. 
+
+Padrões Arquiteturais MVC X Arquitetura do Django; Disponível em: [https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django](https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django). Acesso em: 05 de outubro de 2019.
+
+HIROSHI, Lucas; MARQUES, Guilherme; RODRIGUES, Natália; BORGES, Felipe; NÓBREGA, Mateus. ReceitaMais - Documento de Arquitetura. Disponível em: <https://github.com/fga-eps-mds/2017.2-Receita-Mais/wiki/Documento-de-Arquitetura>. Acesso em: 30 de outubro de 2019.
+
+GraphQL vs REST: Overview; Disponível em: <https://phil.tech/api/2017/01/24/graphql-vs-rest-overview/>. Acesso em: 30 de outubro de 2019.
+
+Why use GraphQL, good and bad reasons. Disponível em: <https://honest.engineering/posts/why-use-graphql-good-and-bad-reasons>. Acesso em 30 de outubro de 2019.
 
 ## 2. Representação da Arquitetura
-### 2.1 Django
-Django é um Python Web framework de alto-nível que encoraja o desenvolvimento rápido e organizado. O framework enfatiza a reusabilidade e conectividade de componentes, sendo assim,utiliza-se menos código.
-Aplica-se a arquitetura Model-View-Template (MVT).
-### 2.1.1 MVT
-* Model - É a parte que representa as classes, além de ser a parte responsavel por ler e escrever informações no banco de dados, para isso cada classe da model representa uma tabela do banco de dados.
-* View - É a comunicação entre a Model e a Template. É nela que há o tratamento de informações recebidas e o retorno para o usuário.
-* Template - É a parte da visão de usuário. Geralmente usa HTML, CSS, javascript, etc. Normalmente é focada na apresentação da aplicação para o usuário.
+
+### 2.1 Diagrama de Relações
+
+![Diagrama_Relações](https://imgur.com/vDmAmoT.png)
+
+### 2.2 Django
+Django é uma framework web escrita em Python que encoraja o desenvolvimento rápido e organizado. A framework enfatiza a reusabilidade e conectividade de componentes, assim, diminuindo a quantidade de código e facilitando a criação de sistemas mais complexos. No Django, é utilizada a  arquitetura Model-View-Template (MVT), que é uma variação da arquitetura Model-View-Controller (MVC).
+
+#### 2.2.1 MVT
+* Model - É a parte que define o banco de dados, suas classes e como elas se comportam, métodos para manipulação do banco de dados e as validações aplicáveis (regras de negócio).
+* View - É a ponte de comunicação entre a Model e a Template. É nela que há o tratamento de informações recebidas e o retorno para o usuário.
+* Template - É a parte da interface do usuário. Contém as informações enviadas pela *View* e define como serão apresentadas essas informações, além de comunicar para ela as informações enviadas pelo usuário.
 
 
-### 2.2 GraphQL
-GraphQL é uma linguagem de busca para APIs que fornece uma descrição completa dos dados da API e dispoẽ o poder de solicitar exatamento o que o usuário necessita. Tais funcionalidades contribuem na eficiência e velocidade no desenvolvimento de aplicações.
-### 2.2.1 Graphene-Python
-Graphene-Python é uma biblioteca que oferece as funcionalidades do GraphQL para o Python. Seu objetivo principal é dispor uma rica API para facilitar o desenvolvimento de aplicações.
+### 2.3 GraphQL
+GraphQL é uma linguagem de busca e de manipulação de dados para APIs que permite o usuário estruturar os dados que ele necessita. A linguagem oferece uma flexibilidade e uma maior facilidade em lidar com APIs mais complexas do que outras soluções. A gama de funcionalidades contribui na eficiência e velocidade no desenvolvimento de aplicações.
 
-### 2.2.2 Graphene-Django
+#### 2.3.1 Graphene
+Graphene Python é uma biblioteca que oferece as ferramentas necessárias para implementar uma API GraphQL em Python. Ela permite que os dados que o seu serviço providenciará sejam definidos usando código Python.
+
+### 2.4 Telegram
+
+Telegram é uma aplicação multiplataforma de troca de mensagens instantâneas baseada na nuvem. Focada em segurança e performance, permite que o usuário envie texto, imagens, fotos, mensagens de áudios e arquivos de qualquer tipo. Ele também providencia uma API para que desenvolvedores possam implementar bots que interajam com usuários.
+
+<!---
+#### 2.3.2 Graphene-Django
 Graphene-Django é construído em cima do Graphene. Fornece uma camada de abstração adicional que torna mais fácil implementar GraphQl em um projeto Django.
 
-### 2.3 Vue.js
+
+### 2.4 Vue.js
 Vue é um framework progressivo do JavaScript de código aberto para construir interfaces de usuários. Diferente de outros frameworks, Vue é projetado desde o ínicio para ser adotável de forma incremental. O Vue também pode funcionar como uma estrutura de aplicativos web capaz de alimentar aplicativos avançados de um única página.
+-->
 
 ## 3. Objetivos e Restrições da Arquitetura
 
 ### 3.1 Objetivos
+- O sistema deve garantir a privacidade dos dados inseridos no banco de dados
 - Deve ser possível estruturar o condomínio (blocos e apartamentos) e cadastrar moradores manualmente;
 - Fornecer a funcionalidade de autenticação de usuário, morador e visitante, via voz;
 - O sistema deve estabelecer uma comunicação com o usuário via áudio, de forma a colher informações necessárias para autorização da entrada;
@@ -97,10 +121,6 @@ Vue é um framework progressivo do JavaScript de código aberto para construir i
 ## 4. Visão Lógica
 ### 4.1 Visão Geral
 A portaria virtual Alohomora está sendo construída em Django, utilizando da ferramenta de busca GraphQL, integrada com Graphene-Django. O objetivo principal ao usar o Django é ter uma organização que facilite o trabalho e a adaptação do grupo. O GraphQL fornece velocidade na busca de dados e eficiência.
-
-### 4.2 Diagrama de Relações
-
-![Diagrama_Relações](https://imgur.com/vDmAmoT.png)
 
 ### 4.3 Diagrama de Pacotes
 
