@@ -77,23 +77,17 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 >
 > ***cpf***: o número do CPF do morador
 >
-> ***apartment***: o apartamento no qual o morador reside
+> ***block***: o número (ou código) do bloco no qual o morador pertence
 >
-> ***block***: o bloco no qual o morador pertence
+> ***apartment***: o número do apartamento no qual o morador reside
 >
-> ***voiceData***: o vetor de características [MFCC](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum) da voz
+> **audioSpeakingPhrase**: o vetor do áudio do morador dizendo a frase comum de autênticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados. 
 >
-> ***mfccAudioSpeakingName***: o vetor de características [MFCC](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum) do áudio do morador dizendo o próprio nome
+> ***audioSpeakingName***: o vetor do áudio do morador dizendo o próprio nome. As recomendações sobre o formato de áudio são as mesmas em relação ao atributo *audioSpeakingPhrase*.
+>
+> **audioSamplerate**: a taxa de amostragem dos áudios atribuídos ao morador. Também é fornecido pela função de abertura de áudio citada na descrição do atributo *audioSpeakingPhrase*
 
 ### 2.1.1. Criando um morador
-Para criar um morador, além dos dados básicos como: nome, CPF, email, telefone e etc., serão necessários dois atributos vitais, estes são:
-> ***voiceData***:
-*O vetor de áudio do morador dizendo uma frase comum a todos os moradores do condomínio.*
-Aqui é recomendado que todos os áudios enviados tenham a taxa de amostragem igual a 16000. Tenha cuidado também para que os áudios não contenham grandes pausas, partes silenciosas ou cortes durante a fala.
-
-> ***mfccAudioSpeakingName***:
-*O vetor de características MFCC de um áudio do morador dizendo o próprio nome.*
-As mesmas recomendações em relação ao atributo *voiceData* devem ser consideradas aqui.
 
 ```graphql
 mutation createResident(
@@ -103,10 +97,10 @@ mutation createResident(
             $cpf: String!,
             $apartment: String!,
             $block: String!,
-            $voiceData: String,
-            $mfccData: String,
-            $mfccAudioSpeakingName: String,
             $password: String,
+            $audioSpeakingPhrase: [Float]!,
+            $audioSpeakingName: [Float]!
+            $audioSamplerate: Int
             ){
             createResident(
                 completeName: $completeName,
@@ -115,10 +109,10 @@ mutation createResident(
                 phone: $phone,
                 apartment: $apartment,
                 block: $block,
-                voiceData: $voiceData,
-                mfccData: $mfccData,
-                mfccAudioSpeakingName: $mfccAudioSpeakingName,
-                password: $password
+                password: $password,
+                audioSpeakingPhrase: $audioSpeakingPhrase,
+                audioSpeakingName: $audioSpeakingName
+                audioSamplerate: $audioSamplerate
             ){
                 resident{
                     completeName
@@ -135,12 +129,6 @@ mutation createResident(
             }
         }
 ```
-> **Observações**:
-
-> Os campos **mfccData e voiceData são mutualmente exclusivos**!
- **mfccData** deve ser usado para enviar o **vetor de MFCC** já computado. **voiceData** deve ser usado para enviar o **vetor de áudio**; nesse caso, o cálculo do MFCC será realizado internamente na API.
-
-> Note que ***voiceData*** e ***mfccAudioSpeakingName*** são passados como uma string, neste caso, deve-se enviar o vetor como um ***JSON***.
 
 ### 2.1.2. Consultando um morador
 > Disponível apenas para **[administrador](#5-administração)**
@@ -580,23 +568,33 @@ mutation deleteApartment ($apartmentNumber: String!) {
 
 ## 3.1. Autênticação de morador
 
-A autênticação de morador pode ser realizada através da **biometria de voz**. Tal coisa é possível pois cada morador, a nível de dados, possui um atributo de características da própria voz.
+A autênticação de morador pode ser realizada através da **biometria de voz**. Tal coisa é possível pois cada morador, a nível de dados, possui os atributos de áudio que permitem reconhecer características da sua voz.
 
-A *query* requere dois campos
+A *query* possui dois campos obrigatórios e dois optativos:
 
-> ***cpf***: O CPF do morador
+> ***cpf*** (obrigatório): O CPF do morador
 >
-> ***voiceData***: O vetor de áudio, em formato JSON, do morador dizendo uma frase comum a todos os moradores do condomínio  
+> ***audioSpeakingPhrase*** (obrigatório): O vetor de áudio do morador dizendo a frase comum dita no ato do cadastro.
+>
+> **audioSpeakingName**: O vetor de áudio do morador dizendo o próprio nome
+>
+> **audioSamplerate**: O samplerate dos áudios que serão enviados  
 
-No fim, a query retorna **True** caso a voz pertence ao morador e **False** caso contrário
+O **comportamento** interno da *query* **pode variar** dependendo dos campos que são fornecidos. Caso sejam fornecidos apenas os obrigatórios, o morador será autênticado apenas com o áudio da frase comum. Caso seja fornecido também o campo *audioSpeakingName*, o morador será autênticado tanto pelo nome, quanto pela frase comum (ambos devem obter 100% de *score*). Caso o campo *audioSamplerate* seja omitido, a taxa de amostragem dos áudios será considerada como 16000.
+
+No fim, a query retorna **True** caso a voz pertence ao morador ou **False** caso contrário
 ```graphql
 query voiceBelongsResident(
     $cpf: String!,
-    $voiceData: String!
+    $audioSpeakingPhrase: [Float]!,
+    $audioSpeakingName: [Float],
+    $audioSamplerate: Int
     ){
         voiceBelongsResident(
             cpf: $cpf,
-            voiceData: $voiceData
+            audioSpeakingPhrase: $audioSpeakingPhrase,
+            audioSpeakingName: $audioSpeakingName,
+            audioSamplerate: $audioSamplerate
         )
     }
 ```
