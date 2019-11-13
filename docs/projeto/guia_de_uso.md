@@ -81,11 +81,11 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 >
 > ***apartment***: o número do apartamento no qual o morador reside
 >
-> **audioSpeakingPhrase**: o vetor do áudio do morador dizendo a frase comum de autênticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados. 
+> ***audioSpeakingPhrase***: o vetor do áudio do morador dizendo a frase comum de autênticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados. 
 >
 > ***audioSpeakingName***: o vetor do áudio do morador dizendo o próprio nome. As recomendações sobre o formato de áudio são as mesmas em relação ao atributo *audioSpeakingPhrase*.
 >
-> **audioSamplerate**: a taxa de amostragem dos áudios atribuídos ao morador. Também é fornecido pela função de abertura de áudio citada na descrição do atributo *audioSpeakingPhrase*
+> ***audioSamplerate***: a taxa de amostragem dos áudios atribuídos ao morador. Também é fornecido pela função de abertura de áudio citada na descrição do atributo *audioSpeakingPhrase*
 
 ### 2.1.1. Criando um morador
 
@@ -99,7 +99,7 @@ mutation createResident(
             $block: String!,
             $password: String,
             $audioSpeakingPhrase: [Float]!,
-            $audioSpeakingName: [Float]!
+            $audioSpeakingName: [Float]!,
             $audioSamplerate: Int
             ){
             createResident(
@@ -576,13 +576,13 @@ A *query* possui dois campos obrigatórios e dois optativos:
 >
 > ***audioSpeakingPhrase*** (obrigatório): O vetor de áudio do morador dizendo a frase comum dita no ato do cadastro.
 >
-> **audioSpeakingName**: O vetor de áudio do morador dizendo o próprio nome
+> ***audioSpeakingName***: O vetor de áudio do morador dizendo o próprio nome
 >
-> **audioSamplerate**: O samplerate dos áudios que serão enviados  
+> ***audioSamplerate***: O samplerate dos áudios que serão enviados  
 
 O **comportamento** interno da *query* **pode variar** dependendo dos campos que são fornecidos. Caso sejam fornecidos apenas os obrigatórios, o morador será autênticado apenas com o áudio da frase comum. Caso seja fornecido também o campo *audioSpeakingName*, o morador será autênticado tanto pelo nome, quanto pela frase comum (ambos devem obter 100% de *score*). Caso o campo *audioSamplerate* seja omitido, a taxa de amostragem dos áudios será considerada como 16000.
 
-No fim, a query retorna **True** caso a voz pertence ao morador ou **False** caso contrário
+No fim, a query retorna **True** caso a voz pertença ao morador ou **False** caso contrário
 ```graphql
 query voiceBelongsResident(
     $cpf: String!,
