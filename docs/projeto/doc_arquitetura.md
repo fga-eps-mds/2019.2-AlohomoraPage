@@ -9,8 +9,10 @@
 |  26/09/2019  | 1.0 | Criação da primeira versão do documento | Paulo Batista, Rodrigo Lima, Victor Gonçalves |
 |  01/10/2019  | 1.1 | Revisão de erros ortográficos e sintaxe | João Luis Baraky, Victor Jorge Gonçalves |
 | 06/10/2019 | 1.2 | Incremento de uma explicação básica do que é significa MVT | Rodrigo Lima, João Luis Baraky |
-| 07/10/2019 | 1.2 | Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5 | João Luis Baraky, Rodrigo Lima |
+| 07/10/2019 | 1.2 | Adição dos objetivos, diagramas de pacotes e relações e melhoria no topico 5| João Luis Baraky, Rodrigo Lima |
 | 30/10/2019 | 1.3 | Revisão do documento | Mateus Nóbrega |
+| 09/11/2019 | 1.3 | Adição de alguns diagrama e atualização de outros| Matheus Nóbrega, Paulo Batista|
+
 
 ## Sumário
 __[1. Introdução](#1-introducao)__ \
@@ -28,13 +30,20 @@ __[2. Representação da Arquitetura](#2-representacao-da-arquitetura)__ \
 <!---[2.3 Vue.js](#23-vuejs) -->
 
 __[3. Objetivos e Restrições da Arquitetura](#3-objetivos-e-restricoes-da-arquitetura)__ \
-[3.1 Objetivos](#31-objetivos)
+[3.1 Objetivos](#31-objetivos) \
 [3.2 Restrições](#32-restricoes)
 
-__[4. Visão Lógica](#4-visao-logica)__ \
-[4.1 Visão Geral](#41-visao-geral)
+__[4. Visão de Casos de Uso](#4-visao-de-casos-de-uso)__ \
 
-__[5. Qualidade](#5-qualidade)__
+__[5. Visão Lógica](#5-visao-logica)__ \
+[5.1 Visão Geral](#51-visao-geral) \
+[5.2 Diagrama de Relações](#52-diagrama-de-relacoes) \
+[5.2.1 Responsabilidades por etapa](#521-responsabilidades-por-etapa) \
+[5.3 Diagrama de pacotes](#53-diagrama-de-pacotes)
+__[6. Visão de implementação](#6-visao-de-implementacao)__ \
+[6.1 Diagrama das models](#61-diagrama-das-models)
+
+__[7. Qualidade](#7-qualidade)__
 
 
 ## 1. Introdução
@@ -106,8 +115,6 @@ Vue é um framework progressivo do JavaScript de código aberto para construir i
 - O sistema deve garantir a privacidade dos dados inseridos no banco de dados
 - Deve ser possível estruturar o condomínio (blocos e apartamentos) e cadastrar moradores manualmente;
 - Fornecer a funcionalidade de autenticação de usuário, morador e visitante, via voz;
-- O sistema deve estabelecer uma comunicação com o usuário via áudio, de forma a colher informações necessárias para autorização da entrada;
-- Deve ser possível fazer o cadastro de um visitante via voz;
 - É necessário ter uma comunicação com o morador com o intuito de notificar a chegada de um visitante;
 - O morador deverá ter o poder se permitir ou não a entrada de um visitante que o referencia.
 
@@ -118,15 +125,54 @@ Vue é um framework progressivo do JavaScript de código aberto para construir i
 - Os usuários moradores devem ter o aplicativo Telegram instalado e internet para a comunicação com o sistema via bot.
 - O hardware deve ter um microfone para a gravação de voz, pois precisa-se da voz para a autenticação.
 
-## 4. Visão Lógica
-### 4.1 Visão Geral
+## 4, Visão de Casos de Uso
+Os casos de uso relevantes para a arquitetura são:
+
+- Falar uma frase
+- Analisar a voz
+- Aceitar morador
+- Abrir porta
+- Aceitar visitante
+- Notificar o morador da chegada do visitante
+- Avisar a chegada
+- Gerenciar apartamentos
+- Gerenciar usuários
+- Ver entradas dos moradores e vistantes
+
+![Diagrama_casos_de_uso](../img/diagrama_casos_de_uso.png)
+
+## 5. Visão Lógica
+### 5.1 Visão Geral
 A portaria virtual Alohomora está sendo construída em Django, utilizando da ferramenta de busca GraphQL, integrada com Graphene-Django. O objetivo principal ao usar o Django é ter uma organização que facilite o trabalho e a adaptação do grupo. O GraphQL fornece velocidade na busca de dados e eficiência.
 
-### 4.3 Diagrama de Pacotes
+### 5.2 Diagrama de Relações
 
-![Diagrama_Pacotes](https://imgur.com/Tx87mx5.png)
+![Diagrama_Relações](../img/diagrama_de_relacoes.png)
 
-## 5. Qualidade
+
+O morador interage com o AlohoBot para requisitar ou modificar alguma informação, e interage também com o interfone para fazer a autenticação por voz. Nos quais requisitam algum tipo de ação do sistema, assim a API processa a ação requirida.
+O graphQL a partir das mutations e queries, é o responsável por buscar e modificar as informações através da comunicação com a model, esta que se comunica com o banco de dados, e retorna o resultado para o bot ou interfone.
+
+### 5.2.1 Responsabilidades por etapa
+
+A etapa de comunicação do usuário com o AlohoBot deve conter não apenas classes responsáveis pelos componentes gráficos e visuais, mas também deve guardar as informações do usuário no banco de dados. Dessa forma, o código do bot vai estar desacoplado com o da API.
+
+No AlohoBot vai ser feito um request em forma de json para o graphql buscar ou modificar as informações no banco de dados. Pois no graphql é necessário que seja provido o corpo do JSON informando se vai estar performando uma query ou mutation. Apartir disso, já é possível retornar para o cliente as informações.
+
+Essa comunicação do AlohoBot com a API é protegida por um token.
+
+Na etapa de comunicação do usuário com o interfone vai ser feita com o uso de uma interface de comunicação baseado no Home Assistant que permite a sua integração com dispositivos de IoT. A partir do iot tem uma comunicação direta com a API, no qual a voz do usuário vai ser transformada pelo vetor de características da voz e passado para o algoritmo fastdtw, e então permitindo ou não a entrada do morador.
+
+### 5.3 Diagrama de Pacotes
+
+![Diagrama_Pacotes](../img/diagrama_de_pacotes.png)
+
+## 6. Visão de implementação
+### 6.1 Diagrama das models
+
+![Diagrama_de_classes](../img/diagrama_de_classes.png)
+
+## 7. Qualidade
 - Utilização de algorítimos otimizados para autenticação de usuário pelas voz.
 - Utilização de boas práticas no desenvolvimento do projeto.
 - Utilização de ferramentas que garantem velocidade e produtividade, como o GraphQL e Django.
