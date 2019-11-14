@@ -30,8 +30,8 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
         - 2.5.2 - [Consultando um apartamento](#252-consultando-um-apartamento)
         - 2.5.3 - [Modificando os dados de um apartamento](#253-modificando-os-dados-de-um-apartamento)
         - 2.5.4 - [Deletando um apartamento](#254-deletando-um-apartamento)
-- 3 - [Autênticação de usuários](#3-autênticação-de-usuários)
-    - 3.1 - [Autênticação de morador](#31-autênticação-de-morador)
+- 3 - [Autenticação de usuários](#3-autenticação-de-usuários)
+    - 3.1 - [Autenticação de morador](#31-autenticação-de-morador)
 - 4 - [Logs de entrada](#4-logs-de-entrada)
     - 4.1 - [Entradas de morador](#41-entradas-de-morador)
         - 4.1.1 - [Criando uma entrada de morador](#411-criando-uma-entrada-de-morador)
@@ -52,6 +52,7 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
     - 6.1 - [Criando um morador](#61-criando-um-morador)
     - 6.2 - [Realizando login](#62-realizando-login)
     - 6.3 - [Verificando se o token está correto](#63-verificando-se-o-token-está-correto)
+
 ---
 
 # 1. Comunicação
@@ -81,7 +82,7 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 >
 > ***apartment***: o número do apartamento no qual o morador reside
 >
-> ***audioSpeakingPhrase***: o vetor do áudio do morador dizendo a frase comum de autênticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados. 
+> ***audioSpeakingPhrase***: o vetor do áudio do morador dizendo a frase comum de autenticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados. 
 >
 > ***audioSpeakingName***: o vetor do áudio do morador dizendo o próprio nome. As recomendações sobre o formato de áudio são as mesmas em relação ao atributo *audioSpeakingPhrase*.
 >
@@ -562,13 +563,13 @@ mutation deleteApartment ($apartmentNumber: String!) {
 
 ---
 
-# 3. Autênticação de usuários
+# 3. Autenticação de usuários
 
-*Alohomora* conta com ferramentas que possibilitam a criação de um sistema de autênticação de usuários. Tais ferramentas podem ser utilizadas para compor desde simples sistemas de autênticação (**aceitar/rejeitar**), até sistemas complexos de várias etapas.
+*Alohomora* conta com ferramentas que possibilitam a criação de um sistema de autenticação de usuários. Tais ferramentas podem ser utilizadas para compor desde simples sistemas de autenticação (**aceitar/rejeitar**), até sistemas complexos de várias etapas.
 
-## 3.1. Autênticação de morador
+## 3.1. Autenticação de morador
 
-A autênticação de morador pode ser realizada através da **biometria de voz**. Tal coisa é possível pois cada morador, a nível de dados, possui os atributos de áudio que permitem reconhecer características da sua voz.
+A autenticação de morador pode ser realizada através da **biometria de voz**. Tal coisa é possível pois cada morador, a nível de dados, possui os atributos de áudio que permitem reconhecer características da sua voz.
 
 A *query* possui dois campos obrigatórios e dois optativos:
 
@@ -580,7 +581,7 @@ A *query* possui dois campos obrigatórios e dois optativos:
 >
 > ***audioSamplerate***: O samplerate dos áudios que serão enviados  
 
-O **comportamento** interno da *query* **pode variar** dependendo dos campos que são fornecidos. Caso sejam fornecidos apenas os obrigatórios, o morador será autênticado apenas com o áudio da frase comum. Caso seja fornecido também o campo *audioSpeakingName*, o morador será autênticado tanto pelo nome, quanto pela frase comum (ambos devem obter 100% de *score*). Caso o campo *audioSamplerate* seja omitido, a taxa de amostragem dos áudios será considerada como 16000.
+O **comportamento** interno da *query* **pode variar** dependendo dos campos que são fornecidos. Caso sejam fornecidos apenas os obrigatórios, o morador será autenticado apenas com o áudio da frase comum. Caso seja fornecido também o campo *audioSpeakingName*, o morador será autênticado tanto pelo nome, quanto pela frase comum (ambos devem obter 100% de *score*). Caso o campo *audioSamplerate* seja omitido, a taxa de amostragem dos áudios será considerada como 16000.
 
 No fim, a query retorna **True** caso a voz pertença ao morador ou **False** caso contrário
 ```graphql
