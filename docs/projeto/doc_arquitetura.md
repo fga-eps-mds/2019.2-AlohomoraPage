@@ -65,7 +65,7 @@ Alohomora é um projeto realizado para as disciplinas Métodos de Desenvolviment
 ### 1.4 Referências
 Sistema de Registro em Curso - Documento de Arquitetura de Software; Disponível em: [http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm](http://mds.cultura.gov.br/extend.formal_resources/guidances/examples/resources/sadoc_v1.htm). Acesso em: 26 de setembro de 2019.
 
-PATROCÍNIO, Sofia; GOUVEIA, Micaella; PEREIRA, Samuel; TAIRA, Luis; MUNIZ, Amanda. Chatbot Gaia: Arquitetura. Disponível em: [https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md](https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md). Acesso em: 26 de setembro de 2019. 
+PATROCÍNIO, Sofia; GOUVEIA, Micaella; PEREIRA, Samuel; TAIRA, Luis; MUNIZ, Amanda. Chatbot Gaia: Arquitetura. Disponível em: [https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md](https://github.com/fga-eps-mds/2019.1-Gaia/blob/master/docs/projeto/DocArquitetura.md). Acesso em: 26 de setembro de 2019.
 
 Padrões Arquiteturais MVC X Arquitetura do Django; Disponível em: [https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django](https://github.com/fga-eps-mds/A-Disciplina/wiki/Padr%C3%B5es-Arquiteturais---MVC-X-Arquitetura-do-Django). Acesso em: 05 de outubro de 2019.
 
@@ -77,26 +77,22 @@ Why use GraphQL, good and bad reasons. Disponível em: <https://honest.engineeri
 
 ## 2. Representação da Arquitetura
 
-### 2.1 Diagrama de Relações
-
-![Diagrama_Relações](https://imgur.com/vDmAmoT.png)
-
-### 2.2 Django
+### 2.1 Django
 Django é uma framework web escrita em Python que encoraja o desenvolvimento rápido e organizado. A framework enfatiza a reusabilidade e conectividade de componentes, assim, diminuindo a quantidade de código e facilitando a criação de sistemas mais complexos. No Django, é utilizada a  arquitetura Model-View-Template (MVT), que é uma variação da arquitetura Model-View-Controller (MVC).
 
-#### 2.2.1 MVT
+#### 2.1.1 MVT
 * Model - É a parte que define o banco de dados, suas classes e como elas se comportam, métodos para manipulação do banco de dados e as validações aplicáveis (regras de negócio).
 * View - É a ponte de comunicação entre a Model e a Template. É nela que há o tratamento de informações recebidas e o retorno para o usuário.
 * Template - É a parte da interface do usuário. Contém as informações enviadas pela *View* e define como serão apresentadas essas informações, além de comunicar para ela as informações enviadas pelo usuário.
 
 
-### 2.3 GraphQL
+### 2.2 GraphQL
 GraphQL é uma linguagem de busca e de manipulação de dados para APIs que permite o usuário estruturar os dados que ele necessita. A linguagem oferece uma flexibilidade e uma maior facilidade em lidar com APIs mais complexas do que outras soluções. A gama de funcionalidades contribui na eficiência e velocidade no desenvolvimento de aplicações.
 
-#### 2.3.1 Graphene
+#### 2.2.1 Graphene
 Graphene Python é uma biblioteca que oferece as ferramentas necessárias para implementar uma API GraphQL em Python. Ela permite que os dados que o seu serviço providenciará sejam definidos usando código Python.
 
-### 2.4 Telegram
+### 2.3 Telegram
 
 Telegram é uma aplicação multiplataforma de troca de mensagens instantâneas baseada na nuvem. Focada em segurança e performance, permite que o usuário envie texto, imagens, fotos, mensagens de áudios e arquivos de qualquer tipo. Ele também providencia uma API para que desenvolvedores possam implementar bots que interajam com usuários.
 
@@ -155,13 +151,15 @@ O graphQL a partir das mutations e queries, é o responsável por buscar e modif
 
 ### 5.2.1 Responsabilidades por etapa
 
-A etapa de comunicação do usuário com o AlohoBot deve conter não apenas classes responsáveis pelos componentes gráficos e visuais, mas também deve guardar as informações do usuário no banco de dados. Dessa forma, o código do bot vai estar desacoplado com o da API.
+A etapa de comunicação do usuário com o AlohoBot deve conter não apenas classes responsáveis pelos componentes gráficos e visuais, mas também deve guardar as informações do usuário no banco de dados. Dessa forma, o código do bot está desacoplado com o da API.
 
 No AlohoBot vai ser feito um request em forma de json para o graphql buscar ou modificar as informações no banco de dados. Pois no graphql é necessário que seja provido o corpo do JSON informando se vai estar performando uma query ou mutation. Apartir disso, já é possível retornar para o cliente as informações.
 
+No alohobot ou interfone, a voz do usuário vai ser transformada pelo verto de características da voz e passado para o algoritmo fastdtw na API, e então a API vai falar se a voz realmente pertence ao usuário. 
+<!--
 Essa comunicação do AlohoBot com a API é protegida por um token.
-
-Na etapa de comunicação do usuário com o interfone vai ser feita com o uso de uma interface de comunicação baseado no Home Assistant que permite a sua integração com dispositivos de IoT. A partir do iot tem uma comunicação direta com a API, no qual a voz do usuário vai ser transformada pelo vetor de características da voz e passado para o algoritmo fastdtw, e então permitindo ou não a entrada do morador.
+Na e tapa de comunicação do usuário com o interfone vai ser feita com o uso de uma interface de comunicação baseado no Home Assistant que permite a sua integração com dispositivos de IoT. A partir do iot tem uma comunicação direta com a API, no qual a voz do usuário vai ser transformada pelo vetor de características da voz e passado para o algoritmo fastdtw, e então permitindo ou não a entrada do morador.
+-->
 
 ### 5.3 Diagrama de Pacotes
 
@@ -171,6 +169,7 @@ Na etapa de comunicação do usuário com o interfone vai ser feita com o uso de
 ### 6.1 Diagrama das models
 
 ![Diagrama_de_classes](../img/diagrama_de_classes.png)
+![Diagrama_de_classes](../img/diagrama_de_classes_bot.png)
 
 ## 7. Qualidade
 - Utilização de algorítimos otimizados para autenticação de usuário pelas voz.
