@@ -48,6 +48,9 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
         - 5.2.1 - [Ativando um usuário](#521-ativando-um-usuário)
         - 5.2.2 - [Desativando um usuário](#522-desativando-um-usuário)
         - 5.2.3 - [Consultando usuários desativados](#523-consultando-usuários-desativados)
+        - 5.2.4 - [Modificando o email](#524-modificando-o-email)
+        - 5.2.5 - [Modificando a senha](#525-modificando-a-senha)
+        - 5.2.6 - [Criando usuário](#525-criando-usuário)
 - 6 - [Exemplos](#6-exemplos)
     - 6.1 - [Criando um morador](#61-criando-um-morador)
     - 6.2 - [Realizando login](#62-realizando-login)
@@ -82,7 +85,7 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 >
 > ***apartment***: o número do apartamento no qual o morador reside
 >
-> ***audioSpeakingPhrase***: o vetor do áudio do morador dizendo a frase comum de autenticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados. 
+> ***audioSpeakingPhrase***: o vetor do áudio do morador dizendo a frase comum de autenticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados.
 >
 > ***audioSpeakingName***: o vetor do áudio do morador dizendo o próprio nome. As recomendações sobre o formato de áudio são as mesmas em relação ao atributo *audioSpeakingPhrase*.
 >
@@ -732,30 +735,6 @@ query allEntriesVisitors{
 }
 ```
 
-Consultando todas as entradas pendentes para um apartamento
-```graphql
-query entriesVisitorsPending(
-    $blockNumber: String,
-    $apartmentNumber: String,
-    ){
-        entriesVisitorsPending(
-            blockNumber: $blockNumber,
-            apartmentNumber: $apartmentNumber
-            ){
-                visitor{
-                    completeName
-                    cpf
-                }
-                apartment{
-                    number
-                    block{
-                        number
-                    }
-                }
-                date
-            }
-    }
-```
 
 Consultando todas as entradas de visitante ou de um apartamento.
 
@@ -924,6 +903,67 @@ query unactivesUsers {
     }
 }
 ```
+
+### 5.2.4. Modificando o email
+
+> Disponível apenas para **[administrador](#5-administração)**
+
+```graphql
+mutation changeEmail(
+  $userEmail: String,
+  $email: String,
+  ){
+  changeEmail(
+    userEmail: $userEmail,
+    email: $email){
+    user{
+       email
+    }
+  }
+}
+```
+
+### 5.2.5. Modificando a senha
+
+> Disponível apenas para **[administrador](#5-administração)**
+
+```graphql
+mutation changePassword(
+  $userEmail: String,
+  $password: String,
+  ){
+      changePassword(
+        userEmail: $userEmail,
+        password: $password){
+        user{
+           password
+        }
+      }
+    }
+```
+
+### 5.2.6. Criação do usuário
+
+> Disponível apenas para **[administrador](#5-administração)**
+
+```graphql
+mutation createUser(
+  $username: String,
+  $email: String,
+  $password: String
+  ){
+      createUser(
+        username: $username,
+        email: $email,
+        password: $password,
+      ){ user{
+         username
+         email
+        }
+       }
+    }
+```
+
 
 # 6. Exemplos
 
