@@ -1,4 +1,6 @@
 site_name: Alohomora
+markdown_extensions:
+  - codehilite
 nav:
 - Início: 'index.md'
 - Projeto:

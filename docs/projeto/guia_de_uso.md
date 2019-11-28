@@ -1,9 +1,9 @@
 # Guia de uso
 
-Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, bem como a maneiras de utiliza-las.
+Aqui você encontra detalhes sobre cada funcionalidade disponibilizada pela API e instruções para utilizá-las.
 
 ## Conteúdo
-- 1 - [Como funciona a comunicação](#1-comunicação)
+- 1 - [Como funciona a comunicação](#1-comunicacao)
 - 2 - [CRUD](#2-crud)
     - 2.1 - [Morador](#21-morador)
         - 2.1.1 - [Criando um morador](#211-criando-um-morador)
@@ -15,11 +15,11 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
         - 2.2.2 - [Consultando um visitante](#222-consultando-um-visitante)
         - 2.2.3 - [Modificando os dados de um visitante](#223-modificando-os-dados-de-um-visitante)
         - 2.2.4 - [Deletando um visitante](#224-deletando-um-visitante)
-    - 2.3 - [Serviços](#23-serviços)
-        - 2.3.1 - [Criando um serviço](#231-criando-um-serviço)
-        - 2.3.2 - [Consultando um serviço](#232-consultando-um-serviço)
-        - 2.3.3 - [Modificando os dados de um serviço](#233-modificando-os-dados-de-um-serviço)
-        - 2.3.4 - [Deletando um serviço](#234-deletando-um-serviço)
+    - 2.3 - [Serviços](#23-servicos)
+        - 2.3.1 - [Criando um serviço](#231-criando-um-servico)
+        - 2.3.2 - [Consultando um serviço](#232-consultando-um-servico)
+        - 2.3.3 - [Modificando os dados de um serviço](#233-modificando-os-dados-de-um-servico)
+        - 2.3.4 - [Deletando um serviço](#234-deletando-um-servico)
     - 2.4 - [Bloco](#24-bloco)
         - 2.4.1 - [Criando um bloco](#241-criando-um-bloco)
         - 2.4.2 - [Consultando um bloco](#242-consultando-um-bloco)
@@ -48,6 +48,9 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
         - 5.2.1 - [Ativando um usuário](#521-ativando-um-usuário)
         - 5.2.2 - [Desativando um usuário](#522-desativando-um-usuário)
         - 5.2.3 - [Consultando usuários desativados](#523-consultando-usuários-desativados)
+        - 5.2.4 - [Modificando o email](#524-modificando-o-email)
+        - 5.2.5 - [Modificando a senha](#525-modificando-a-senha)
+        - 5.2.6 - [Criando usuário](#525-criando-usuário)
 - 6 - [Exemplos](#6-exemplos)
     - 6.1 - [Criando um morador](#61-criando-um-morador)
     - 6.2 - [Realizando login](#62-realizando-login)
@@ -57,7 +60,7 @@ Aqui você encontra detalhes sobre cada funcionalidade disponibilizada na API, b
 
 # 1. Comunicação
 
-A comunicação com a API é baseada em GraphQL e utiliza a rota padrão  **/graphql**. Você pode encontrar mais detalhes sobre como utilizar o GraphQL [aqui](https://graphql.org/).
+A comunicação com a API é baseada em GraphQL e utiliza a rota padrão  **/graphql**. Você pode encontrar mais detalhes sobre como utilizar o GraphQL [aqui](https://graphql.org/learn/).
 
 ---
 
@@ -82,7 +85,7 @@ Um morador é uma entidade que está vinculada a um bloco e a um apartamento e q
 >
 > ***apartment***: o número do apartamento no qual o morador reside
 >
-> ***audioSpeakingPhrase***: o vetor do áudio do morador dizendo a frase comum de autenticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados. 
+> ***audioSpeakingPhrase***: o vetor do áudio do morador dizendo a frase comum de autenticação (todos os moradores deveriam falar a mesma frase). Aqui é recomendado que seja enviado os dados de um áudio de formato **.wav**. Confira essa [função](https://librosa.github.io/librosa/generated/librosa.core.load.html) em *Python* que permite a abertura de um arquivo de áudio .wav como um vetor de dados.
 >
 > ***audioSpeakingName***: o vetor do áudio do morador dizendo o próprio nome. As recomendações sobre o formato de áudio são as mesmas em relação ao atributo *audioSpeakingPhrase*.
 >
@@ -132,7 +135,7 @@ mutation createResident(
 ```
 
 ### 2.1.2. Consultando um morador
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 Para consultar um morador específico
 ```graphql
@@ -214,7 +217,7 @@ type ResidentInput {
 ```
 
 ### 2.1.4. Deletando um morador
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 ```graphql
 mutation deleteResident ($email: String!) {
@@ -228,13 +231,13 @@ mutation deleteResident ($email: String!) {
 ---
 ## 2.2. Visitante
 
-Um visitante é uma entidade que representa exatamente o que o seu próprio nome sugere, um visitante. Essa entidade existe para possibilitar a interação de visitantes com o sistema da portaria, a fim de garantir rastreabilidade e segurança. Por padrão, um visitante é representado pelos seguintes atributos:
+Um visitante é uma entidade que representa exatamente o que o seu próprio nome sugere. Ela existe para possibilitar a interação de visitantes com o sistema da portaria, a fim de garantir rastreabilidade e segurança. Por padrão, um visitante é representado pelos seguintes atributos:
 > ***completeName***: o nome completo do visitante
 >
 > ***cpf***: o cpf do visitante
 
 ### 2.2.1. Criando um visitante
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 ```graphql
 mutation createVisitor(
@@ -254,7 +257,7 @@ mutation createVisitor(
 ```
 
 ### 2.2.2. Consultando um visitante
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 Consultando um *visitante* específico
 ```graphql
@@ -276,7 +279,7 @@ query allVisitors{
 ```
 
 ### 2.2.3. Modificando os dados de um visitante
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 O CPF atual deve ser passado para que seja possível realizar a busca pelo visitante no banco de dados. Caso seja necessário alterar o CPF, envie o novo valor através do campo *newCpf*
 ```graphql
@@ -299,7 +302,7 @@ mutation updateVisitor(
 ```
 
 ### 2.2.4. Deletando um visitante
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation deleteVisitor ($cpf: String!) {
     deleteVisitor (cpf: $cpf) {
@@ -321,7 +324,7 @@ A nível de dados, um serviço é representado pelo seguintes atributos:
 > ***password***: a senha do funcionário ou da empresa
 
 ### 2.3.1. Criando um serviço
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation createService (
     $completeName: String!,
@@ -371,7 +374,7 @@ query services{
 ### 2.3.3. Modificando os dados de um serviço
 > Necessário **login** como serviço
 
-Neste caso a busca pelo *serviço* em específico será feita através dos **dados de login**. O **valor original** de cada atributo do serviço será **substituído pelo valor fornecido** através da mutation. Caso não seja desejável mudar um atributo específico, apenas o omita na mutation.
+Neste caso a busca pelo *serviço* em específico será feita através dos **dados de login**. O valor original de cada atributo do serviço será substituído pelo valor fornecido através da mutation. Caso não seja desejável mudar um atributo específico, apenas o omita na mutation.
 ```graphql
 mutation updateService(
         $serviceData: ServiceInput,
@@ -396,7 +399,7 @@ type ServiceInput {
 ```
 
 ### 2.3.4. Deletando um serviço
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation deleteService ($serviceEmail: String!) {
         deleteService (serviceEmail: $serviceEmail) {
@@ -412,7 +415,7 @@ mutation deleteService ($serviceEmail: String!) {
 Um *Bloco* é uma entidade que representa uma certa área do condomínio. O *Bloco* por padrão, a nível de dados, é representado pelo atributo *número*.
 
 ### 2.4.1. Criando um bloco
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation createBlock ($number: String!) {
         createBlock (number: $number) {
@@ -442,7 +445,7 @@ query allBlocks{
 ```
 
 ### 2.4.3. Modificando os dados de um bloco
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation updateBlock (
     $number: String!,
@@ -462,7 +465,7 @@ mutation updateBlock (
 Neste caso a variável ***blockNumber*** será utilizada para procurar o bloco desejado, e o valor do atributo ***number*** do bloco será mudado para o valor da variável **$number** enviada através da mutation.
 
 ### 2.4.4. Deletando um bloco
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation deleteBlock ($blockNumber: String!) {
     deleteBlock (blockNumber: $blockNumber) {
@@ -477,7 +480,7 @@ mutation deleteBlock ($blockNumber: String!) {
 Um *Apartamento* é uma entidade que representa uma unidade de moradia do condomínio. Um apartamento é representado pelo atributo *number* e está diretamente associado a um bloco.
 
 ### 2.5.1. Criando um apartamento
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation createApartment(
     $number: String!,
@@ -552,7 +555,7 @@ mutation updateApartment(
 Neste caso, a variável ***apartmentNumber*** será usada para procurar o apartamento desejado e mudará o valor do atributo ***number*** do apartamento para o valor da variável **$number** enviada através da mutation.
 
 #### 2.5.4. Deletando um apartamento
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 ```graphql
 mutation deleteApartment ($apartmentNumber: String!) {
     deleteApartment (apartmentNumber: $apartmentNumber) {
@@ -581,7 +584,7 @@ A *query* possui dois campos obrigatórios e dois optativos:
 >
 > ***audioSamplerate***: O samplerate dos áudios que serão enviados  
 
-O **comportamento** interno da *query* **pode variar** dependendo dos campos que são fornecidos. Caso sejam fornecidos apenas os obrigatórios, o morador será autenticado apenas com o áudio da frase comum. Caso seja fornecido também o campo *audioSpeakingName*, o morador será autênticado tanto pelo nome, quanto pela frase comum (ambos devem obter 100% de *score*). Caso o campo *audioSamplerate* seja omitido, a taxa de amostragem dos áudios será considerada como 16000.
+O **comportamento** interno da *query* **pode variar** dependendo dos campos que são fornecidos. Caso sejam fornecidos apenas os obrigatórios, o morador será autenticado apenas com o áudio da frase comum. Caso seja fornecido também o campo *audioSpeakingName*, o morador será autenticado tanto pelo nome, quanto pela frase comum (ambos devem obter o *score* de 100%). Caso o campo *audioSamplerate* seja omitido, a taxa de amostragem dos áudios será considerada como 16000.
 
 No fim, a query retorna **True** caso a voz pertença ao morador ou **False** caso contrário
 ```graphql
@@ -732,30 +735,6 @@ query allEntriesVisitors{
 }
 ```
 
-Consultando todas as entradas pendentes para um apartamento
-```graphql
-query entriesVisitorsPending(
-    $blockNumber: String,
-    $apartmentNumber: String,
-    ){
-        entriesVisitorsPending(
-            blockNumber: $blockNumber,
-            apartmentNumber: $apartmentNumber
-            ){
-                visitor{
-                    completeName
-                    cpf
-                }
-                apartment{
-                    number
-                    block{
-                        number
-                    }
-                }
-                date
-            }
-    }
-```
 
 Consultando todas as entradas de visitante ou de um apartamento.
 
@@ -788,9 +767,9 @@ query entriesVisitor(
     }
 ```
 
-Aqui o **comportamento** da *query* irá depender dos **argumentos passados**.
+Aqui, o **comportamento** da *query* irá depender dos **argumentos passados**.
 
-Caso você envie o *cpf*, *blockNumber* e o *apartmentNumber* simultâneamente, serão retornadas todas as entradas do visitante detentor do cpf fornecido ao apartamento indicado pelos argumentos *blockNumber* e *apartmentNumber*.
+Caso você envie os campos *cpf*, *blockNumber* e o *apartmentNumber* simultaneamente, serão retornadas todas as entradas do visitante detentor do CPF fornecido ao apartamento indicado pelos argumentos *blockNumber* e *apartmentNumber*.
 
 Caso você envie apenas *blockNumber* e *apartmentNumber*, serão retornadas todas as entradas relacionadas ao apartamento descrito por *blockNumber* e *apartmentNumber*.
 
@@ -814,7 +793,7 @@ A conta padrão possui as seguintes credenciais:
 
 ### 5.1.1. Criando um administrador
 
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 ```graphql
 mutation createAdmin($email: String, $password: String) {
@@ -830,7 +809,7 @@ mutation createAdmin($email: String, $password: String) {
 
 ### 5.1.2. Deletando um administrador
 
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 ```graphql
 mutation deleteAdmin($email: String) {
@@ -842,7 +821,7 @@ mutation deleteAdmin($email: String) {
 
 ### 5.1.3. Consultando um administrador
 
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 Consultando todos os administradores
 ```graphql
@@ -862,15 +841,15 @@ query admin($creatorEmail: String, $adminEmail: String) {
 ```
 Aqui você pode consultar todos o administradores criado pelo administrador detentor do email de valor igual a *creatorEmail* ou simplesmente buscar um administrador detentor do email de valor igual a *adminEmail*.
 
- Você pode também verificar se um determinado administrador criou um outro; nesse caso, basta enviar um valor para *creatorEmail* e para *adminEmail* simultâneamente.
+ Você pode também verificar se um determinado administrador criou um outro; nesse caso, basta enviar um valor para *creatorEmail* e para *adminEmail* simultaneamente.
 
 ## 5.2. Gerênciando conta de usuários
 
-Um administrador pode decidir se um determinado usuário possui validez no sistema. Caso um usuário não esteja em estado válido, este não poderá interagir com o sistema.
+Um administrador pode decidir se um determinado usuário está ativado no sistema. Caso um usuário não esteja, este não poderá interagir com o sistema.
 
 ### 5.2.1. Ativando um usuário
 
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 ```graphql
 mutation activateUser($userEmail: String) {
@@ -890,7 +869,7 @@ mutation activateUser($userEmail: String) {
 
 ### 5.2.2. Desativando um usuário
 
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 ```graphql
 mutation deactivateUser($userEmail: String) {
@@ -910,7 +889,7 @@ mutation deactivateUser($userEmail: String) {
 
 ### 5.2.3. Consultando usuários desativados
 
-> Disponível apenas para **[administrador](#5-administração)**
+> Disponível apenas para **[administradores](#5-administracao)**
 
 ```graphql
 query unactivesUsers {
@@ -925,9 +904,70 @@ query unactivesUsers {
 }
 ```
 
+### 5.2.4. Modificando o email
+
+> Disponível apenas para **[administradores](#5-administracao)**
+
+```graphql
+mutation changeEmail(
+  $userEmail: String,
+  $email: String,
+  ){
+  changeEmail(
+    userEmail: $userEmail,
+    email: $email){
+    user{
+       email
+    }
+  }
+}
+```
+
+### 5.2.5. Modificando a senha
+
+> Disponível apenas para **[administradores](#5-administracao)**
+
+```graphql
+mutation changePassword(
+  $userEmail: String,
+  $password: String,
+  ){
+      changePassword(
+        userEmail: $userEmail,
+        password: $password){
+        user{
+           password
+        }
+      }
+    }
+```
+
+### 5.2.6. Criação do usuário
+
+> Disponível apenas para **[administradores](#5-administracao)**
+
+```graphql
+mutation createUser(
+  $username: String,
+  $email: String,
+  $password: String
+  ){
+      createUser(
+        username: $username,
+        email: $email,
+        password: $password,
+      ){ user{
+         username
+         email
+        }
+       }
+    }
+```
+
+
 # 6. Exemplos
 
-Nessa seção serão demonstrados vários casos de uso de algumas funcionalidades da API. Os códigos foram escritos em Python, assumindo que a aplicação esteja disponível em http://localhost:8000/graphql.
+Nessa seção serão demonstrados vários casos de uso de algumas funcionalidades da API. Os códigos foram escritos em Python e assumem que a aplicação esteja disponível no endereço <http://localhost:8000/graphql>.
 
 ## 6.1. Criando um morador
 
@@ -1020,7 +1060,7 @@ mutation tokenAuth($email: String!, $password: String!){
  }
 }
 ```
-Com o token recebido apartir desta mutation deve ser copiado para o header, para fazer isso pode ser utilizado um programa chamado insomnia. Depois de feito essa etapa, já vai ser possível realizar tarefas com o tipo do usuário logado.
+Com o token recebido a partir desta mutation, a mesma deve ser inserida no *header* de uma requisição. Para fazer isso, qualquer cliente REST (*Insomnia*, *Postman*, etc.) pode ser usado. Depois disso, já vai ser possível realizar tarefas com o tipo do usuário logado.
 
 ## 6.3. Verificando se o token está correto
 ```
