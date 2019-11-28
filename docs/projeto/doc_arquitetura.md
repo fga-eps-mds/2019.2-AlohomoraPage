@@ -153,9 +153,9 @@ O graphQL a partir das mutations e queries, é o responsável por buscar e modif
 
 A etapa de comunicação do usuário com o AlohoBot deve conter não apenas classes responsáveis pelos componentes gráficos e visuais, mas também deve guardar as informações do usuário no banco de dados. Dessa forma, o código do bot está desacoplado com o da API.
 
-No AlohoBot vai ser feito um request em forma de json para o graphql buscar ou modificar as informações no banco de dados. Pois no graphql é necessário que seja provido o corpo do JSON informando se vai estar performando uma query ou mutation. Apartir disso, já é possível retornar para o cliente as informações.
+No AlohoBot vai ser feito uma request para o GraphQL buscar ou modificar as informações no banco de dados, pois no GraphQL é necessário que seja definido no corpo do JSON se a requisição desejada estará performando uma query ou uma mutation. A partir disso, já é possível retornar para o cliente as informações.
 
-No alohobot ou interfone, a voz do usuário vai ser transformada pelo verto de características da voz e passado para o algoritmo fastdtw na API, e então a API vai falar se a voz realmente pertence ao usuário. 
+No AlohoBot ou interfone, a voz do usuário será convertida e passada para o algoritmo FastDTW, implementada dentro da API e ela retornará se a voz realmente pertence ao usuário ou não. 
 <!--
 Essa comunicação do AlohoBot com a API é protegida por um token.
 Na e tapa de comunicação do usuário com o interfone vai ser feita com o uso de uma interface de comunicação baseado no Home Assistant que permite a sua integração com dispositivos de IoT. A partir do iot tem uma comunicação direta com a API, no qual a voz do usuário vai ser transformada pelo vetor de características da voz e passado para o algoritmo fastdtw, e então permitindo ou não a entrada do morador.
