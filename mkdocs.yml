@@ -7,6 +7,7 @@ nav:
   - 'Documento de visão': 'projeto/doc_visao.md'
   - 'Documento de arquitetura': 'projeto/doc_arquitetura.md'
   - 'Guia de uso': 'projeto/guia_de_uso.md'
+  - 'Postmortem' : 'postmortem.md'
 - Gerência:
   - 'Termo de abertura do projeto': 'gerencia/TAP.md'
   - 'Estrutura analítica do projeto': 'gerencia/EAP.md'
