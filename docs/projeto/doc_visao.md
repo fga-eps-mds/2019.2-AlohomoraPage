@@ -59,6 +59,7 @@ O documento visa definir e apontar as características gerais do projeto portari
 
 ### 1.2 Escopo
 A portaria virtual Alohomora tem como objetivo automatizar as funções exercidas por um porteiro e de autenticar usuários por voz, gerenciando o fluxo de pessoas que entram e saem de um condomínio. A funcionalidade é baseada na ideia de que um morador ou funcionário do condomínio tenha sua entrada permitida ao ter sua voz reconhecida e autenticada pelo sistema. Para isso, é necessário que haja um cadastro prévio deles.
+
 Para visitantes, o protocolo é diferente. Ao chegar à portaria, o indivíduo será questionado se possui cadastro: em caso negativo, será requerido dele alguns dados, como o nome e CPF. Após a verificação do cadastro, o visitante dirá para qual apartamento deseja ir e o sistema enviará uma notificação para o morador para que tome a decisão sobre a entrada do visitante.
 
 ### 1.3 Definições, acrônimos e abreviações
